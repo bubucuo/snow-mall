@@ -1,15 +1,27 @@
 import { defineConfig } from 'umi';
 
 export default defineConfig({
-  layout: {},
+  // layout: {},
   routes: [
-    { path: '/', exact: true, component: '@/pages/home' },
-    { path: '/home', component: '@/pages/home/' },
-    { path: '/login', component: '@/pages/login/' },
     {
-      path: '/user',
-      component: '@/pages/user/',
-      wrappers: ['../layouts/SecurityLayout'],
+      path: '/',
+      component: '@/layouts/BasicLayout',
+      routes: [
+        { path: '/', exact: true, component: '@/pages/home' },
+        { path: '/home', component: '@/pages/home' },
+        { path: '/login', component: '@/pages/login' },
+        { path: '/search', component: '@/pages/search' },
+
+        {
+          path: '/',
+          component: '@/layouts/SecurityLayout',
+          routes: [
+            { path: '/user', component: '@/pages/user' },
+            { path: '/olist', component: '@/pages/olist' },
+            { path: '/cart', component: '@/pages/cart' },
+          ],
+        },
+      ],
     },
   ],
 });

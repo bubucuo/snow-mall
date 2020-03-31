@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Carousel } from 'antd-mobile';
 import styles from './index.less';
-import SearchInput from './SearchInput';
-import Carousel from './Carousel';
-import NavTable from './NavTable';
-import homePage2 from '../../static/homePage2.png';
 
 const carouselImgs = [
   {
@@ -31,15 +28,16 @@ const carouselImgs = [
 
 export default () => {
   return (
-    <div className={styles.main}>
-      <SearchInput />
-      <Carousel />
-      <div className={styles.Humzi}>
-        <div className={styles.kGYGSu}></div>
-      </div>
-      <NavTable />
-
-      <img src={homePage2} />
-    </div>
+    <Carousel className={styles.main} autoplay={false} infinite>
+      {carouselImgs.map(item => (
+        <a
+          className={styles.carouselItem}
+          key={item.src}
+          // href="http://www.kaikeba.com"
+        >
+          <img src={item.src} alt={item.alt} />
+        </a>
+      ))}
+    </Carousel>
   );
 };
