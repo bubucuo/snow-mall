@@ -13,7 +13,7 @@ const menu = [
     key: 'cart',
     title: '购物车',
     link: '/cart',
-    icon: 'fenlei',
+    icon: '3',
   },
   {
     key: 'olist',

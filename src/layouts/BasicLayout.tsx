@@ -24,8 +24,6 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     }
   }, []);
 
-  console.log('props', props); //sy-log
-
   return (
     <div className={styles.main}>
       <article>{children}</article>

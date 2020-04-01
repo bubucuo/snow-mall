@@ -11,6 +11,7 @@ export default defineConfig({
         { path: '/home', component: '@/pages/home' },
         { path: '/login', component: '@/pages/login' },
         { path: '/search', component: '@/pages/search' },
+        { path: '/product/:id', component: '@/pages/product/[id]' },
 
         {
           path: '/',

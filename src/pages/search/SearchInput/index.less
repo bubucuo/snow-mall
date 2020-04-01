@@ -1,0 +1,49 @@
+.main {
+  position: relative;
+  padding: 6px 66px 6px 6px;
+  background-color: #e3e3e5;
+
+  .searchBar {
+    @size: 28px;
+
+    min-height: @size;
+    height: @size;
+    line-height: @size;
+    background-color: white;
+    font-size: 13px;
+    border-radius: 4px;
+    text-align: left;
+
+    ::-webkit-input-placeholder {
+      text-align: center;
+      font-size: 13px;
+    }
+
+    :global {
+      .am-search-synthetic-ph-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .am-search-synthetic-ph-icon {
+          width: 13px;
+          background-size: 12px auto;
+        }
+
+        .am-search-synthetic-ph-placeholder {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+
+  .btn {
+    position: absolute !important;
+    top: 6px;
+    right: 8px;
+    width: 50px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 13px;
+  }
+}
