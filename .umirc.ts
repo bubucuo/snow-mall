@@ -1,7 +1,36 @@
 import { defineConfig } from 'umi';
-
+const theme = {
+  'brand-primary': 'red',
+  'color-text-base': 'green',
+  'ghost-button-color': 'yellow',
+};
 export default defineConfig({
   // layout: {},
+
+  extraBabelPlugins: [
+    [
+      'import',
+      {
+        libraryName: 'antd-mobile',
+        style: true,
+      },
+    ],
+  ],
+  // theme: {
+  //   'brand-primary': 'red',
+  //   'color-text-base': '#333',
+  // },
+  // cssLoaderOptions: ,
+  lessLoader: {
+    test: /\.less$/,
+    use: [
+      'style-loader',
+      'css-loader',
+      { loader: 'less-loader', options: { modifyVars: theme } },
+    ],
+    include: /node_modules/,
+  },
+
   routes: [
     {
       path: '/',

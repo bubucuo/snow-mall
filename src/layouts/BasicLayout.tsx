@@ -11,6 +11,7 @@ import '../static/flexible';
 
 interface BasicLayoutProps {
   dispatch: Dispatch;
+  location: Object;
 }
 
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
@@ -24,7 +25,6 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     }
   }, []);
 
-  console.log('showBottomNav', location); //sy-log
   const { pathname } = location;
   const showBottomNav = pathname.indexOf('/product/') === -1;
 

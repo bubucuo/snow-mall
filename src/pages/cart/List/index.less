@@ -1,0 +1,50 @@
+.main {
+  .node {
+    // position: relative;
+    @w: 100px;
+    // padding-left: @w;
+    display: flex;
+
+    .imgBox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: @w;
+      margin: 0 10px 0 0;
+
+      img {
+        width: 100px;
+        height: auto;
+      }
+    }
+
+    .right {
+      flex-grow: 1;
+    }
+
+    .title {
+      line-height: 28px;
+      min-height: 56px;
+    }
+
+    .info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    // :global {
+    // .am-list-content {
+    //   display: flex;
+    //   height: 140px;
+    //   overflow-y: hidden;
+
+    //   img {
+    //     display: block;
+    //     width: 140px;
+    //     height: auto;
+    //   }
+    // }
+    // }
+  }
+}
