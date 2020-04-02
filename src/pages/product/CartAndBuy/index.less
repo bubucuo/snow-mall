@@ -1,11 +1,31 @@
-.bottomNav {
+.main {
+  display: flex;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+  height: 50px;
+  border-top: 1px solid #ddd;
+
+  .cart {
+    width: 66px;
+    font-size: 10px;
+    margin: 3px 0 0 0;
+    line-height: 1;
+    text-align: center;
+
+    a {
+      display: inline-block;
+    }
+
+    .title {
+      color: rgb(136, 136, 136);
+      margin: 6px 0 0;
+    }
+  }
 
   .addCart {
-    background: yellow;
+    background: linear-gradient(138deg, #ffa600, #ffb000 77%, #ffbc00);
   }
 
   .buyNow {
@@ -13,10 +33,10 @@
   }
 
   .btn {
-    :global {
-      .am-tab-bar-tab-icon {
-        display: none;
-      }
-    }
+    width: 50%;
+    line-height: 50px;
+    font-size: 14px;
+    color: white;
+    text-align: center;
   }
 }

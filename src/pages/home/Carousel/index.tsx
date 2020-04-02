@@ -28,12 +28,12 @@ const carouselImgs = [
 
 export default () => {
   return (
-    <Carousel className={styles.main} autoplay={false} infinite>
+    <Carousel className={styles.main} autoplay={true} infinite>
       {carouselImgs.map(item => (
         <a
           className={styles.carouselItem}
           key={item.src}
-          // href="http://www.kaikeba.com"
+          href="http://www.kaikeba.com"
         >
           <img src={item.src} alt={item.alt} />
         </a>

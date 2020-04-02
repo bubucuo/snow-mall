@@ -14,7 +14,7 @@ interface BasicLayoutProps {
 }
 
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
-  const { dispatch, children } = props;
+  const { dispatch, children, location } = props;
 
   useEffect(() => {
     if (dispatch) {
@@ -24,12 +24,14 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     }
   }, []);
 
+  console.log('showBottomNav', location); //sy-log
+  const { pathname } = location;
+  const showBottomNav = pathname.indexOf('/product/') === -1;
+
   return (
     <div className={styles.main}>
       <article>{children}</article>
-      <footer>
-        <BottomNav />
-      </footer>
+      <footer>{showBottomNav && <BottomNav />}</footer>
     </div>
   );
 };
