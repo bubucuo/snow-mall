@@ -19,6 +19,7 @@
     ]
   },
   "dependencies": {
+    "@types/classnames": "^2.2.10",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.0.12",
     "antd-mobile": "^2.3.1",

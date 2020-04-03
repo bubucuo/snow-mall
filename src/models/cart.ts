@@ -1,28 +1,29 @@
 import { query } from '@/services/cart';
 import { Effect, Reducer } from 'umi';
+import { ProductList } from './connect';
 
-export interface ModelState {
+export interface CartModelState {
   checkedIds: string[];
-  list?: object[];
+  list: ProductList;
 }
 
-export interface ModelType {
+export interface CartModelType {
   namespace: 'cart';
-  state: ModelState;
+  state: CartModelState;
   effects: {
     query: Effect;
     editCart: Effect;
   };
   reducers: {
-    saveCart: Reducer<ModelState>;
+    saveCart: Reducer<CartModelState>;
   };
 }
 
-const Model: ModelType = {
+const Model: CartModelType = {
   namespace: 'cart',
   state: {
     checkedIds: [],
-    list: [],
+    list: { data: [] },
   },
   effects: {
     *query(_, { call, put }) {

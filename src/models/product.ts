@@ -1,7 +1,7 @@
 import { query } from '@/services/product';
 import { Effect, Reducer } from 'umi';
 
-export interface ModelState {
+export interface ProductModelState {
   id: string;
   price: number;
   titl: string;
@@ -9,18 +9,18 @@ export interface ModelState {
   imgs: string[];
 }
 
-export interface ModelType {
+export interface ProductModelType {
   namespace: 'product';
-  state: ModelState;
+  state: ProductModelState;
   effects: {
     query: Effect;
   };
   reducers: {
-    saveProduct: Reducer<ModelState>;
+    saveProduct: Reducer<ProductModelState>;
   };
 }
 
-const Model: ModelType = {
+const Model: ProductModelType = {
   namespace: 'product',
   state: {},
   effects: {

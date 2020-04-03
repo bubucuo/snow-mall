@@ -1,7 +1,7 @@
 import { query } from '@/services/search';
 import { Effect, Reducer } from 'umi';
 
-export interface ModelState {
+export interface SearchModelState {
   list?: object[];
   // name?: string;
   // userid?: string;
@@ -11,18 +11,18 @@ export interface ModelState {
   // }[];
 }
 
-export interface ModelType {
+export interface SearchModelType {
   namespace: 'search';
-  state: ModelState;
+  state: SearchModelState;
   effects: {
     query: Effect;
   };
   reducers: {
-    saveSearch: Reducer<ModelState>;
+    saveSearch: Reducer<SearchModelState>;
   };
 }
 
-const Model: ModelType = {
+const Model: SearchModelType = {
   namespace: 'search',
   state: {
     list: [],

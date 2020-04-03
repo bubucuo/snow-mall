@@ -41,6 +41,13 @@
       "unicode_decimal": 58905
     },
     {
+      "icon_id": "1309833",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
       "icon_id": "1638357",
       "name": "首页",
       "font_class": "shouye",
@@ -62,11 +69,25 @@
       "unicode_decimal": 58984
     },
     {
+      "icon_id": "7226229",
+      "name": "订单",
+      "font_class": "dingdan",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
       "icon_id": "11124977",
       "name": "购物车",
       "font_class": "3",
-      "unicode": "e618",
-      "unicode_decimal": 58904
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "12752732",
+      "name": "地址",
+      "font_class": "dizhi_huaban",
+      "unicode": "e629",
+      "unicode_decimal": 58921
     }
   ]
 }

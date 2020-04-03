@@ -20,8 +20,9 @@ function getList() {
 
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 export default {
-  'GET /api/getCart': {
-    checkedIds: ['1'],
-    list: { data: getList() },
+  'GET /api/getDefaultReceivingInfo': {
+    name: '高少云',
+    tel: '19910100120',
+    address: '北京市海淀区开课吧',
   },
 };
