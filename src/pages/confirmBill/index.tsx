@@ -4,6 +4,9 @@ import { ConnectState } from '@/models/connect';
 
 import styles from './index.less';
 import ReceivingInfo from './ReceivingInfo';
+import List from './List';
+import PayBar from './PayBar';
+import { WingBlank, WhiteSpace } from 'antd-mobile';
 
 export interface ConfirmBillProps
   extends ConfirmBillModelState,
@@ -29,9 +32,14 @@ const ConfirmBill: React.FC<ConfirmBillProps> = ({
   console.log('hahs', location); //sy-log
 
   return (
-    <div className={styles.main}>
+    <WingBlank className={styles.main}>
+      <WhiteSpace size="lg" />
       <ReceivingInfo {...receivingInfo} />
-    </div>
+      <WhiteSpace size="lg" />
+      <List {...(location.state || {})} />
+      <PayBar {...(location.state || {})} />
+      <WhiteSpace size="lg" />
+    </WingBlank>
   );
 };
 

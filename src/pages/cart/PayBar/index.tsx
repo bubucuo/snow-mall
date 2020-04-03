@@ -46,7 +46,7 @@ const PayBar: React.FC<IndexProps> = ({
         className={classnames(styles.btn, !count && 'hidden')}
         to={{
           pathname: '/confirmBill',
-          state: { list: getCheckedList },
+          state: { totalPrice, count, list: getCheckedList },
         }}
       >
         去结算(<span>{count}</span>)

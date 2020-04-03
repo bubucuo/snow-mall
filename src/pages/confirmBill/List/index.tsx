@@ -1,26 +1,47 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Card, WhiteSpace } from 'antd-mobile';
 import classnames from 'classnames';
 import styles from './index.less';
-import { ReceivingInfoState } from 'umi';
-import { Card } from 'antd-mobile';
+import { ProductList, Product } from '@/models/connect';
 
-const List: React.FC<ReceivingInfoState> = ({ name, tel, address }) => {
+interface NodeProps extends Product {
+  key: string;
+  last: boolean;
+}
+
+const Node: React.FC<NodeProps> = ({ id, title, img, price, count, last }) => {
   return (
-    <Card className={styles.main}>
-      <i
-        className={classnames(
-          styles.icon,
-          'xyCenter',
-          'iconfont icon-dizhi_huaban',
-        )}
-      ></i>
-      <div>
-        <span className="font14">{name}</span>
-        <span className="font12">{tel}</span>
-      </div>
-      <div className="font12">{address}</div>
-    </Card>
+    <>
+      <Card className={styles.node}>
+        <div className={styles.imgBox}>
+          <img src={img} alt={title} />
+        </div>
+        <div className={styles.right}>
+          <div className={classnames('font14')}>{title}</div>
+          <div className={styles.info}>
+            <p className={classnames('red')}>￥{price}</p>
+            <span className="font12">x {count}</span>
+          </div>
+        </div>
+      </Card>
+      {!last && <WhiteSpace size="lg" />}
+    </>
   );
 };
 
-export default ReceivingInfo;
+interface IndexProps {
+  onChange: Function;
+  list: ProductList;
+}
+
+const List: React.FC<IndexProps> = ({ list = { data: [] } }) => {
+  return (
+    <div className={styles.main}>
+      {list.data.map((item, index) => (
+        <Node key={item.id} {...item} last={index === list.data.length - 1} />
+      ))}
+    </div>
+  );
+};
+
+export default List;

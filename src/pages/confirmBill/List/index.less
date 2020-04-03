@@ -1,10 +1,35 @@
 .main {
-  position: relative;
-  padding-left: 40px !important;
-  .icon {
-    position: absolute;
-    top: 0;
-    left: 12px;
-    bottom: 0;
+  .node {
+    @w: 100px;
+    display: flex;
+    flex-direction: row;
+
+    .imgBox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: @w;
+      margin: 0 10px 0 0;
+
+      img {
+        width: 100px;
+        height: auto;
+      }
+    }
+
+    .right {
+      flex-grow: 1;
+    }
+
+    .title {
+      line-height: 28px;
+      min-height: 56px;
+    }
+
+    .info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
 }
