@@ -6,7 +6,7 @@ import { MenuDataItem } from '@ant-design/pro-layout';
 // import { DefaultSettings as SettingModelState } from '../../config/defaultSettings';
 import { UserModelState } from './user';
 // import { StateType } from './login';
-import { ProductModelState } from 'umi';
+import { ProductModelState, OListModelState } from 'umi';
 
 // export { GlobalModelState, SettingModelState, UserModelState };
 
@@ -45,6 +45,7 @@ export interface ConnectState {
   cart: CartModelState;
   product: ProductModelState;
   confirmBill: ConfirmBillModelState;
+  olist: OListModelState;
 }
 
 export interface Route extends MenuDataItem {

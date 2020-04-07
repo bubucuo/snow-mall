@@ -1,20 +1,37 @@
-import { queryCurrent, query as queryUsers } from '@/services/user';
+import {
+  queryCurrent,
+  query as queryUsers,
+  queryDetail,
+} from '@/services/user';
 import { Effect, Reducer } from 'umi';
 import { fakeAccountLogin } from '@/services/login';
 
-export interface UserModelState {
-  name?: string;
-  userid?: string;
+export interface UserDetailModelState {
+  name: string;
+  icon?: string;
+  email: string;
+  phone: string;
+  address: string;
+  signature?: string;
+  title?: string;
   tags?: {
     key: string;
     label: string;
   }[];
+  country: string;
+}
+
+export interface UserModelState {
+  name?: string;
+  userid?: string;
+  detail: UserDetailModelState;
 }
 
 export interface UserModelType {
   namespace: 'user';
   state: UserModelState;
   effects: {
+    queryDetail: Effect;
     fetchCurrent: Effect;
     login: Effect;
   };
@@ -25,15 +42,15 @@ export interface UserModelType {
 
 const UserModel: UserModelType = {
   namespace: 'user',
-  state: {},
+  state: { detail: {} },
   effects: {
-    // *fetch(_, { call, put }) {
-    //   const response = yield call(queryUsers);
-    //   yield put({
-    //     type: 'save',
-    //     payload: response,
-    //   });
-    // },
+    *queryDetail(_, { call, put }) {
+      const response = yield call(queryDetail);
+      yield put({
+        type: 'saveCurrentUser',
+        payload: { detail: response },
+      });
+    },
     *fetchCurrent(_, { call, put }) {
       const response = yield call(queryCurrent);
       yield put({
@@ -51,7 +68,7 @@ const UserModel: UserModelType = {
   },
   reducers: {
     saveCurrentUser(state, action) {
-      return { ...state, ...(action.payload || {}) };
+      return { ...state, ...action.payload };
     },
     // changeNotifyCount(
     //   state = {

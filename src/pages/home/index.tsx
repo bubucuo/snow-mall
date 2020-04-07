@@ -4,6 +4,7 @@ import SearchInput from './SearchInput';
 import Carousel from './Carousel';
 import NavTable from './NavTable';
 import homePage2 from '../../static/homePage2.png';
+import Arc from '@/components/Arc';
 
 const carouselImgs = [
   {
@@ -34,9 +35,7 @@ export default () => {
     <div className={styles.main}>
       <SearchInput />
       <Carousel />
-      <div className={styles.Humzi}>
-        <div className={styles.kGYGSu}></div>
-      </div>
+      <Arc />
       <NavTable />
 
       <img src={homePage2} />

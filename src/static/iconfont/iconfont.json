@@ -41,6 +41,13 @@
       "unicode_decimal": 58905
     },
     {
+      "icon_id": "1287691",
+      "name": "待发货",
+      "font_class": "daifahuo",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
       "icon_id": "1309833",
       "name": "更多",
       "font_class": "gengduo",
@@ -62,6 +69,20 @@
       "unicode_decimal": 58881
     },
     {
+      "icon_id": "5756003",
+      "name": "评价",
+      "font_class": "pingjia",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "6524667",
+      "name": "待收货",
+      "font_class": "daishouhuo",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
       "icon_id": "6554427",
       "name": "订单列表",
       "font_class": "dingdanliebiao",
@@ -74,6 +95,13 @@
       "font_class": "dingdan",
       "unicode": "e618",
       "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "9358625",
+      "name": "card",
+      "font_class": "card",
+      "unicode": "e54c",
+      "unicode_decimal": 58700
     },
     {
       "icon_id": "11124977",
