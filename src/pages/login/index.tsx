@@ -5,7 +5,7 @@ import {
 } from '@ant-design/icons';
 import { Alert, Checkbox } from 'antd';
 import React, { useState } from 'react';
-import { Link, connect, Dispatch } from 'umi';
+import { Redirect, connect, Dispatch, Location, UserModelState } from 'umi';
 import { StateType } from '@/models/login';
 import { LoginParamsType } from '@/services/login';
 import { ConnectState } from '@/models/connect';
@@ -14,6 +14,8 @@ import styles from './index.less';
 
 interface LoginProps {
   dispatch: Dispatch;
+  location: Location;
+  user: UserModelState;
   userLogin: StateType;
   submitting?: boolean;
 }
@@ -31,20 +33,24 @@ const LoginMessage: React.FC<{
   />
 );
 
-const Login: React.FC<LoginProps> = props => {
-  const { userLogin = {}, submitting } = props;
-  const { status, type: loginType } = userLogin;
-  const [autoLogin, setAutoLogin] = useState(true);
-
+const Login: React.FC<LoginProps> = ({ location, user, dispatch }) => {
   const handleSubmit = () => {
     let values = {};
-    console.log('omg'); //sy-log
-    const { dispatch } = props;
     dispatch({
       type: 'user/login',
       payload: { ...values },
     });
   };
+
+  const { userid } = user;
+  const isLogin = userid !== null && userid !== undefined && userid !== '';
+  console.log('isLogn', userid); //sy-log
+  if (isLogin) {
+    const { redirect = '/' } = location.state || {};
+
+    return <Redirect to={redirect} />;
+  }
+
   return (
     <div className={styles.main}>
       <button onClick={handleSubmit}>登录</button>
@@ -52,7 +58,6 @@ const Login: React.FC<LoginProps> = props => {
   );
 };
 
-export default connect(({ user, loading }: ConnectState) => ({
-  userLogin: user,
-  // submitting: loading.effects['user/login'],
+export default connect(({ user }: ConnectState) => ({
+  user,
 }))(Login);

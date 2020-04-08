@@ -38,7 +38,6 @@ const Login: React.FC<LoginProps> = props => {
 
   const handleSubmit = () => {
     let values = {};
-    console.log('omg'); //sy-log
     const { dispatch } = props;
     dispatch({
       type: 'user/login',

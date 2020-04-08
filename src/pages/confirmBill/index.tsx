@@ -29,8 +29,6 @@ const ConfirmBill: React.FC<ConfirmBillProps> = ({
     });
   }, []);
 
-  console.log('hahs', location); //sy-log
-
   return (
     <WingBlank className={styles.main}>
       <WhiteSpace size="lg" />

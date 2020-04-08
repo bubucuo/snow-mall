@@ -6,8 +6,7 @@ export default {
   'GET /api/getUserDetail': {
     id: '0',
     name: '莎士比亚',
-    icon:
-      'https://avatar-static.segmentfault.com/382/084/3820841113-595af662a59a7_big64',
+    icon: 'https://tva1.sinaimg.cn/large/00831rSTly1gdm7eok2oij301s01sgli.jpg',
     email: 'shakespeare@kkb.com',
     signature: 'hello world',
     title: '买买买',

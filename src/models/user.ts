@@ -22,8 +22,8 @@ export interface UserDetailModelState {
 }
 
 export interface UserModelState {
-  name?: string;
-  userid?: string;
+  name: string;
+  userid: string;
   detail: UserDetailModelState;
 }
 

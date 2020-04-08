@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent, Component } from 'react';
 import { history } from 'umi';
 import { TabBar } from 'antd-mobile';
 
@@ -29,40 +29,33 @@ const menu = [
   },
 ];
 
-// export default class BottomNav extends Component {
-//   render() {
-//     return (
-//       <ul className="bottomNav">
-//         {menu.map(item => (
-//           <MenuItem key={item.key} {...item} />
-//         ))}
-//       </ul>
-//     );
-//   }
-// }
+interface BottomNavProps {
+  pathname: string;
+}
 
-// function MenuItem(props) {
-//   return (
-//     <li className="menuItem">
-//       <span className={'iconfont icon-' + props.icon}></span>
-//       <Link to={props.link}>{props.title}</Link>
-//     </li>
-//   );
-// }
-
-const BottomNav = () => {
-  const children = menu.map(item => (
-    <TabBar.Item
-      key={item.key}
-      {...item}
-      icon={<span className={'iconfont icon-' + item.icon} />}
-      onPress={() => {
-        history.push(item.link);
-      }}
-    />
-  ));
-
-  return <TabBar children={children} />;
-};
+class BottomNav extends PureComponent<BottomNavProps> {
+  componentWillUnmount() {
+    console.log('BottomNav componentWillUnmount');
+  }
+  render() {
+    const { children, pathname } = this.props;
+    return (
+      <TabBar tintColor="red">
+        {menu.map(({ icon, title, link }) => (
+          <TabBar.Item
+            key={link}
+            title={title}
+            icon={<span className={'iconfont icon-' + icon} />}
+            selectedIcon={<span className={'red iconfont icon-' + icon} />}
+            selected={pathname === link}
+            onPress={() => {
+              history.push(link);
+            }}
+          ></TabBar.Item>
+        ))}
+      </TabBar>
+    );
+  }
+}
 
 export default BottomNav;

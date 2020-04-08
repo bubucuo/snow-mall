@@ -26,7 +26,6 @@ const Product: React.FC<ProductProps> = props => {
     }
   }, []);
 
-  console.log('props', props); //sy-log
   const { imgs, price, title } = props.product;
   return (
     <div className={styles.main}>

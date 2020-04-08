@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { connect, Dispatch } from 'umi';
+import { connect, Dispatch, Location, UserModelState, Redirect } from 'umi';
 import styles from './BasicLayout.less';
 import BottomNav from '@/components/BottomMenu';
 import { ConnectState } from '@/models/connect';
@@ -11,11 +11,12 @@ import '../static/flexible';
 
 interface BasicLayoutProps {
   dispatch: Dispatch;
-  location: Object;
+  location: Location;
+  user: UserModelState;
 }
 
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
-  const { dispatch, children, location } = props;
+  const { dispatch, children, location, user } = props;
 
   useEffect(() => {
     if (dispatch) {
@@ -25,13 +26,21 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     }
   }, []);
 
+  const { userid } = user;
+  const isLogin = userid !== null && userid !== undefined && userid !== '';
+  if (!isLogin) {
+    return <Redirect to="login" />;
+  }
+
+  // console.log('asas', isLogin); //sy-log
+
   const { pathname } = location;
   const showBottomNav = pathname.indexOf('/product/') === -1;
 
   return (
     <div className={styles.main}>
       <article>{children}</article>
-      <footer>{showBottomNav && <BottomNav />}</footer>
+      <footer>{showBottomNav && <BottomNav pathname={pathname} />}</footer>
     </div>
   );
 };

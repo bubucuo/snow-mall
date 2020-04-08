@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Checkbox } from 'antd-mobile';
+import { Card, Checkbox } from 'antd-mobile';
 import classnames from 'classnames';
 import styles from './index.less';
 import { Link } from 'umi';

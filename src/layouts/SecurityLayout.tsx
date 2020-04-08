@@ -1,20 +1,28 @@
 import React from 'react';
-import { Redirect, connect } from 'umi';
+import { Redirect, connect, Dispatch, Location, UserModelState } from 'umi';
 import { ConnectState } from '@/models/connect';
-import { UserModelState } from '@/models/user';
 
 interface SecurityLayoutProps {
-  user?: UserModelState;
+  dispatch: Dispatch;
+  location: Location;
+
+  user: UserModelState;
 }
 
-const SecurityLayout: React.FC<SecurityLayoutProps> = props => {
-  const { children, user } = props;
+const SecurityLayout: React.FC<SecurityLayoutProps> = ({
+  location,
+  children,
+  user,
+}) => {
   const { userid } = user;
   const isLogin = userid !== null && userid !== undefined && userid !== '';
+  console.log('isLogn', userid); //sy-log
   if (!isLogin) {
     return <Redirect to="login" />;
   }
-  return children;
+  const { redirect = '/' } = location.state || {};
+
+  return children; //<Redirect to={redirect} />; //children;
 };
 
 export default connect(({ user }: ConnectState) => ({ user }))(SecurityLayout);

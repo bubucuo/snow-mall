@@ -44,7 +44,10 @@ const Header: React.FC<UserDetailModelState> = ({ name, icon }) => {
         <Card.Body>
           <Flex justify="between" className="font14">
             {personal.map((item, index) => (
-              <Flex.Item className={classnames('flexNone', 'txtCenter')}>
+              <Flex.Item
+                key={index}
+                className={classnames('flexNone', 'txtCenter')}
+              >
                 <div>{item.num}</div>
                 <div>{item.title}</div>
               </Flex.Item>
