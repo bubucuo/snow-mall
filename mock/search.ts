@@ -1,7 +1,7 @@
 var Mock = require('mockjs');
 import { Request, Response } from 'express';
 
-function getProductList({ pageNo = 0, pageSize = 10 }) {
+function getProductList({ pageNo = 0, pageSize = 10, searchKey = '' }) {
   const getProductList = [];
   const catgory = ['手机', '报纸'];
   let productImg = [
@@ -11,10 +11,10 @@ function getProductList({ pageNo = 0, pageSize = 10 }) {
   for (let i = 0; i < pageSize; i++) {
     let realIndex = pageNo * pageSize + i;
     getProductList.push({
-      id: i,
+      id: realIndex, //i,
       img: productImg[i % 2],
       // img: Mock.Random.image('120x120'),
-      title: realIndex + catgory[i % 2] + Mock.Random.ctitle(5, 50),
+      title: searchKey + realIndex + catgory[i % 2] + Mock.Random.ctitle(5, 50),
       price: (Math.random() * 1000).toFixed(2),
       link: '',
       tags: [
@@ -30,11 +30,13 @@ function getProductList({ pageNo = 0, pageSize = 10 }) {
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 export default {
   'POST /api/search': (req: Request, res: Response) => {
-    const { pageNo, pageSize } = req.body;
-    const list = getProductList({ pageNo, pageSize });
+    const { pageNo, pageSize, searchKey } = req.body;
+    const listData = getProductList({ pageNo, pageSize, searchKey });
     res.send({
       status: 'ok',
-      data: list,
+      pageNo,
+      pageSize,
+      data: listData,
     });
   },
 };

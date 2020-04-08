@@ -116,7 +116,7 @@ class List extends React.Component<ListProps, ListState> {
   };
 
   componentDidMount() {
-    this.query();
+    this.props.query({ pageNo: 0 });
   }
 
   query = () => {
@@ -125,6 +125,7 @@ class List extends React.Component<ListProps, ListState> {
     if (dispatch) {
       dispatch({
         type: 'search/query',
+        pageNo: this.props.list.pageNo + 1,
       });
     }
   };
@@ -137,10 +138,10 @@ class List extends React.Component<ListProps, ListState> {
     const { list } = this.props.search || {};
     let index = 0;
     const row = (rowData, sectionID, rowID) => {
-      if (index === list.length - 1) {
+      if (index === list.data.length - 1) {
         return null;
       }
-      const obj = list[index++];
+      const obj = list.data[index++];
 
       return <Node key={rowID} {...obj} />;
     };

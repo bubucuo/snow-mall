@@ -1,14 +1,9 @@
+import { ProductList } from './connect.d';
 import { query } from '@/services/search';
 import { Effect, Reducer } from 'umi';
 
 export interface SearchModelState {
-  list?: object[];
-  // name?: string;
-  // userid?: string;
-  // tags?: {
-  //   key: string;
-  //   label: string;
-  // }[];
+  list: ProductList;
 }
 
 export interface SearchModelType {
@@ -25,50 +20,44 @@ export interface SearchModelType {
 const Model: SearchModelType = {
   namespace: 'search',
   state: {
-    list: [],
+    list: {
+      pageNo: 0,
+      pageSize: 10,
+      data: [],
+    },
   },
   effects: {
-    *query(_, { call, put }) {
-      const response = yield call(query);
+    *query({ payload }, { call, put }) {
+      if (!payload.pageSize) {
+        payload.pageSize = 10; //默认是10
+      }
+      const response = yield call(query, payload);
       yield put({
         type: 'saveSearch',
-        payload: response.data,
+        payload: response,
       });
     },
-    // *fetchCurrent(_, { call, put }) {
-    //   const response = yield call(queryCurrent);
-    //   yield put({
-    //     type: 'saveCurrentUser',
-    //     payload: response,
-    //   });
-    // },
-    // *login(_, { call, put }) {
-    //   const response = yield call(fakeAccountLogin);
-    //   yield put({
-    //     type: 'saveCurrentUser',
-    //     payload: response,
-    //   });
-    // },
   },
   reducers: {
     saveSearch(state, action) {
-      return { ...state, list: action.payload || {} };
+      // 合并
+      const { pageSize, pageNo, data } = action.payload;
+      let newData = [];
+      if (pageNo === 0) {
+        newData = data;
+      } else {
+        newData = [...state.list.data, ...data];
+      }
+
+      return {
+        ...state,
+        list: {
+          pageSize,
+          pageNo,
+          data: newData,
+        },
+      };
     },
-    // changeNotifyCount(
-    //   state = {
-    //     currentUser: {},
-    //   },
-    //   action,
-    // ) {
-    //   return {
-    //     ...state,
-    //     currentUser: {
-    //       ...state.currentUser,
-    //       notifyCount: action.payload.totalCount,
-    //       unreadCount: action.payload.unreadCount,
-    //     },
-    //   };
-    // },
   },
 };
 export default Model;
