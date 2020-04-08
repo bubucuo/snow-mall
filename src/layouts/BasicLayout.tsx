@@ -28,14 +28,15 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
 
   const { userid } = user;
   const isLogin = userid !== null && userid !== undefined && userid !== '';
-  if (!isLogin) {
-    return <Redirect to="login" />;
+  const { pathname } = location;
+
+  if (!isLogin && pathname !== '/login') {
+    return (
+      <Redirect to={{ pathname: '/login', state: { redirect: pathname } }} />
+    );
   }
 
-  // console.log('asas', isLogin); //sy-log
-
-  const { pathname } = location;
-  const showBottomNav = pathname.indexOf('/product/') === -1;
+  const showBottomNav = pathname !== '/product' && pathname !== '/login';
 
   return (
     <div className={styles.main}>

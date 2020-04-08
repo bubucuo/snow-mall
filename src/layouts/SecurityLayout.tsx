@@ -16,13 +16,11 @@ const SecurityLayout: React.FC<SecurityLayoutProps> = ({
 }) => {
   const { userid } = user;
   const isLogin = userid !== null && userid !== undefined && userid !== '';
-  console.log('isLogn', userid); //sy-log
   if (!isLogin) {
     return <Redirect to="login" />;
   }
-  const { redirect = '/' } = location.state || {};
 
-  return children; //<Redirect to={redirect} />; //children;
+  return children;
 };
 
 export default connect(({ user }: ConnectState) => ({ user }))(SecurityLayout);

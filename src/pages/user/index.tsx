@@ -4,6 +4,7 @@ import { ConnectState } from '@/models/connect';
 import styles from './index.less';
 import Header from './Header';
 import MyList from './MyList';
+import Logout from './Logout';
 
 interface UserProps {
   dispatch: Dispatch;
@@ -16,10 +17,17 @@ const User: React.FC<UserProps> = ({ dispatch, user }) => {
   }, []);
   const { detail } = user;
 
+  const logout = () => {
+    dispatch({
+      type: 'user/logout',
+    });
+  };
+
   return (
     <div className={styles.main}>
       <Header {...detail} />
       <MyList />
+      <Logout logout={logout} />
     </div>
   );
 };

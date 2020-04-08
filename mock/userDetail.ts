@@ -4,7 +4,8 @@ import { Request, Response } from 'express';
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 export default {
   'GET /api/getUserDetail': {
-    id: '0',
+    status: 1,
+    id: '001',
     name: '莎士比亚',
     icon: 'https://tva1.sinaimg.cn/large/00831rSTly1gdm7eok2oij301s01sgli.jpg',
     email: 'shakespeare@kkb.com',

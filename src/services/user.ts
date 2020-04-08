@@ -15,3 +15,7 @@ export async function queryNotices(): Promise<any> {
 export async function queryDetail(): Promise<any> {
   return request('/api/getUserDetail');
 }
+
+export async function fakeAccountLogout(): Promise<any> {
+  return request('/api/logout');
+}

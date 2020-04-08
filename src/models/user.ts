@@ -1,7 +1,10 @@
+import { Toast } from 'antd-mobile';
+
 import {
   queryCurrent,
   query as queryUsers,
   queryDetail,
+  fakeAccountLogout,
 } from '@/services/user';
 import { Effect, Reducer } from 'umi';
 import { fakeAccountLogin } from '@/services/login';
@@ -22,6 +25,7 @@ export interface UserDetailModelState {
 }
 
 export interface UserModelState {
+  status?: 0 | 1;
   name: string;
   userid: string;
   detail: UserDetailModelState;
@@ -34,9 +38,11 @@ export interface UserModelType {
     queryDetail: Effect;
     fetchCurrent: Effect;
     login: Effect;
+    logout: Effect;
   };
   reducers: {
     saveCurrentUser: Reducer<UserModelState>;
+    clearCurrentUser: Reducer<UserModelState> | {};
   };
 }
 
@@ -58,11 +64,21 @@ const UserModel: UserModelType = {
         payload: response,
       });
     },
-    *login(_, { call, put }) {
-      const response = yield call(fakeAccountLogin);
+    *login({ payload }, { call, put }) {
+      const response = yield call(fakeAccountLogin, payload);
+      if (response.status === 1) {
+        yield put({
+          type: 'saveCurrentUser',
+          payload: response,
+        });
+      } else {
+        Toast.fail(response.msg || '系统开小差，请稍后再试！', 1);
+      }
+    },
+    *logout(_, { call, put }) {
+      const response = yield call(fakeAccountLogout);
       yield put({
-        type: 'saveCurrentUser',
-        payload: response,
+        type: 'clearCurrentUser',
       });
     },
   },
@@ -70,21 +86,9 @@ const UserModel: UserModelType = {
     saveCurrentUser(state, action) {
       return { ...state, ...action.payload };
     },
-    // changeNotifyCount(
-    //   state = {
-    //     currentUser: {},
-    //   },
-    //   action,
-    // ) {
-    //   return {
-    //     ...state,
-    //     currentUser: {
-    //       ...state.currentUser,
-    //       notifyCount: action.payload.totalCount,
-    //       unreadCount: action.payload.unreadCount,
-    //     },
-    //   };
-    // },
+    clearCurrentUser(state, action) {
+      return {};
+    },
   },
 };
 export default UserModel;

@@ -38,7 +38,7 @@ export default defineConfig({
       routes: [
         { path: '/', exact: true, component: '@/pages/home' },
         { path: '/home', component: '@/pages/home' },
-        // { path: '/login', component: '@/pages/login' },
+        { path: '/login', component: '@/pages/login' },
         { path: '/search', component: '@/pages/search' },
         { path: '/product/:id', component: '@/pages/product/[id]' },
 
@@ -46,7 +46,7 @@ export default defineConfig({
           path: '/',
           component: '@/layouts/SecurityLayout',
           routes: [
-            { path: '/login', component: '@/pages/login' },
+            // { path: '/login', component: '@/pages/login' },
 
             { path: '/user', component: '@/pages/user' },
             { path: '/olist', component: '@/pages/olist' },
