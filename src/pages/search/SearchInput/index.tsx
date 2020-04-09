@@ -21,6 +21,7 @@ export default function SearchInput({ query }: { query: Function }) {
   const onChange = val => {
     setInput(val);
   };
+
   return (
     <Card full className={styles.main}>
       <Button className={styles.btn} onClick={goHome}>

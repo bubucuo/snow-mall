@@ -23,6 +23,7 @@ const Model: SearchModelType = {
     list: {
       pageNo: 0,
       pageSize: 10,
+      totalPage: 0,
       data: [],
     },
   },
@@ -41,7 +42,7 @@ const Model: SearchModelType = {
   reducers: {
     saveSearch(state, action) {
       // 合并
-      const { pageSize, pageNo, data } = action.payload;
+      const { pageSize, pageNo, totalPage, data } = action.payload;
       let newData = [];
       if (pageNo === 0) {
         newData = data;
@@ -54,6 +55,7 @@ const Model: SearchModelType = {
         list: {
           pageSize,
           pageNo,
+          totalPage,
           data: newData,
         },
       };

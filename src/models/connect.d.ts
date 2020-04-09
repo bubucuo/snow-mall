@@ -22,6 +22,7 @@ export interface Product {
 export interface ProductList {
   pageNo: number;
   pageSize: number;
+  totalPage: number;
   data: Product[];
 }
 

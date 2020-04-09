@@ -1,30 +1,8 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Link, connect, Dispatch } from 'umi';
-import { ConnectState } from '@/models/connect';
-
-import { Card, ListView } from 'antd-mobile';
+import { Card, Icon, Link, connect, Dispatch } from 'umi';
+import { PullToRefresh, ListView, Button } from 'antd-mobile';
 import styles from './index.less';
-
-function Node(props) {
-  // const { data } = props;
-  const { img, title, price, tags, id } = props;
-  return (
-    <Link className={styles.node} to={'/product/' + id}>
-      <div className={styles.imgBox}>
-        <img src={img} />
-      </div>
-      <div className={styles.ctn}>
-        <div className={styles.title}>{title}</div>
-        <div className={styles.priceBox}>
-          <span className={styles.yuan}>￥</span>
-          <span className={styles.price}>{price}</span>
-        </div>
-        <Tags data={tags} />
-      </div>
-    </Link>
-  );
-}
 
 function Tags(props) {
   const { data = [] } = props;
@@ -42,8 +20,54 @@ function Tags(props) {
   );
 }
 
+function Node({ img, title, price, tags, id }) {
+  console.log('asas', title); //sy-log
+  return (
+    <Link className={styles.node} to={'/product/' + id}>
+      <div className={styles.imgBox}>
+        <img src={img} />
+      </div>
+      <div className={styles.ctn}>
+        <div className={styles.title}>{title}</div>
+        <div className={styles.priceBox}>
+          <span className={styles.yuan}>￥</span>
+          <span className={styles.price}>{price}</span>
+        </div>
+        <Tags data={tags} />
+      </div>
+    </Link>
+  );
+}
+
+function MyBody(props) {
+  return (
+    <div className="am-list-body my-body">
+      <span style={{ display: 'none' }}>you can custom body wrap element</span>
+      {props.children}
+    </div>
+  );
+}
+
+const data = [
+  {
+    img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
+    title: 'Meet hotel',
+    des: '不是所有的兼职汪都需要风吹日晒',
+  },
+  {
+    img: 'https://zos.alipayobjects.com/rmsportal/XmwCzSeJiqpkuMB.png',
+    title: "McDonald's invites you",
+    des: '不是所有的兼职汪都需要风吹日晒',
+  },
+  {
+    img: 'https://zos.alipayobjects.com/rmsportal/hfVtzEhPzTUewPm.png',
+    title: 'Eat the week',
+    des: '不是所有的兼职汪都需要风吹日晒',
+  },
+];
 const NUM_SECTIONS = 5;
 const NUM_ROWS_PER_SECTION = 5;
+let pageIndex = 0;
 
 const dataBlobs = {};
 let sectionIDs = [];
@@ -66,113 +90,90 @@ function genData(pIndex = 0) {
   rowIDs = [...rowIDs];
 }
 
-interface ListProps extends ConnectProps {
-  dispatch: Dispatch;
-  search: object;
-}
-
-interface ListState {
-  isLoading: boolean;
-  dataSource: object;
-  height: number;
-}
-
-class List extends React.Component<ListProps, ListState> {
-  constructor(props: ListProps) {
+export default class List extends React.Component {
+  constructor(props) {
     super(props);
-    const getSectionData = (dataBlob, sectionID) => dataBlob[sectionID];
-    const getRowData = (dataBlob, sectionID, rowID) => dataBlob[rowID];
-
-    const dataSource = new ListView.DataSource({
-      getRowData,
-      getSectionHeaderData: getSectionData,
-      rowHasChanged: (row1, row2) => row1 !== row2,
-      sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
     });
-
     this.state = {
-      dataSource,
-      isLoading: true,
-      height: (document.documentElement.clientHeight * 3) / 4,
+      dataSource: ds,
+      list: [],
+      upLoading: false,
+      pullLoading: false,
     };
   }
-
-  updateData = () => {
-    const hei =
-      document.documentElement.clientHeight -
-      ReactDOM.findDOMNode(this.lv).parentNode.offsetTop;
-
-    genData();
-
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRowsAndSections(
-        dataBlobs,
-        // sectionIDs,
-        // rowIDs,
-      ),
-      isLoading: false,
-      height: hei,
-    });
-  };
 
   componentDidMount() {
     this.props.query({ pageNo: 0 });
   }
 
-  query = () => {
-    const { dispatch } = this.props;
-    this.setState({ isLoading: true });
-    if (dispatch) {
-      dispatch({
-        type: 'search/query',
-        pageNo: this.props.list.pageNo + 1,
-      });
-    }
+  //上拉加载
+  onEndReached = (page, lastPage) => {
+    this.onRefresh();
+    // //当前页小于总页数继续请求下一页数据，否则停止请求数据
+    // if (Number(page) < Number(lastPage)) {
+    //   this.setState({ upLoading: true });
+    //   //接口请求下一页数据,完成后将upLoading设为false
+    //   //...
+    // }
+  };
+
+  //下拉刷新
+  onRefresh = () => {
+    this.setState({ pullLoading: true });
+    this.props.query({ pageNo: this.props.list.pageNo + 1 });
+
+    //接口请求第一页数据,完成后将pullLoading设为false
+    //...
   };
 
   componentWillReceiveProps(nextProps: ListProps) {
-    this.updateData();
+    this.setState({ pullLoading: false });
   }
 
+  //获取item进行展示
+  renderRow = (item, i) => {
+    console.log('item', item); //sy-log
+    return <Node {...item} />;
+    return <div>//每个item</div>;
+  };
   render() {
-    const { list } = this.props.search || {};
-    let index = 0;
-    const row = (rowData, sectionID, rowID) => {
-      if (index === list.data.length - 1) {
-        return null;
-      }
-      const obj = list.data[index++];
-
-      return <Node key={rowID} {...obj} />;
-    };
-
+    const { dataSource, upLoading, pullLoading } = this.state;
+    const { list } = this.props;
+    const { data } = list;
     return (
-      <Card className={styles.main}>
-        <ListView
-          ref={el => (this.lv = el)}
-          dataSource={this.state.dataSource}
-          renderHeader={() => <span>header</span>}
-          renderFooter={() => (
-            <div style={{ padding: 30, textAlign: 'center' }}>
-              {this.state.isLoading ? 'Loading...' : '加载完毕'}
-            </div>
-          )}
-          // renderSectionHeader={sectionData => (
-          //   <div>{`Task ${sectionData.split(' ')[1]}`}</div>
-          // )}
-          renderRow={row}
-          style={{
-            height: this.state.height,
-            overflow: 'auto',
-          }}
-          pageSize={4}
-          scrollRenderAheadDistance={500}
-          onEndReached={this.onEndReached}
-          onEndReachedThreshold={10}
-        />
-      </Card>
+      <div className={styles.main}>
+        {data.length ? (
+          <ListView
+            dataSource={dataSource.cloneWithRows(data)}
+            renderRow={(rowData, id1, i) => this.renderRow(rowData, i)}
+            initialListSize={10}
+            pageSize={10}
+            renderFooter={() => (
+              <div style={{ padding: 30, textAlign: 'center' }}>
+                {list.pageNo < list.totalPage && upLoading ? (
+                  <Icon type="loading" />
+                ) : null}
+              </div>
+            )}
+            onEndReached={() => this.onEndReached(list.pageNo, list.totalPage)}
+            onEndReachedThreshold={20}
+            useBodyScroll={true}
+            style={{ width: '100vw' }}
+            // pullToRefresh={
+            //   <PullToRefresh // import { PullToRefresh } from 'antd-mobile'
+            //     refreshing={pullLoading}
+            //     onRefresh={this.onRefresh}
+            //   />
+            // }
+          />
+        ) : list && list.data && !list.data.length ? (
+          <div className={styles.goodEntry}>
+            <p>暂无数据</p>
+          </div>
+        ) : null}
+      </div>
     );
   }
 }
-
-export default connect(({ search }: ConnectState) => ({ search }))(List);

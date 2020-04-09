@@ -19,7 +19,7 @@ const data = [
     des: '不是所有的兼职汪都需要风吹日晒',
   },
 ];
-const NUM_ROWS = 20;
+const NUM_ROWS = 10;
 let pageIndex = 0;
 
 function genData(pIndex = 0) {
