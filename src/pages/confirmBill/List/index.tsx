@@ -30,14 +30,14 @@ const Node: React.FC<NodeProps> = ({ id, title, img, price, count, last }) => {
 };
 
 interface IndexProps {
-  onChange: Function;
   list: ProductList;
 }
 
 const List: React.FC<IndexProps> = ({ list = { data: [] } }) => {
+  const { data } = list;
   return (
     <div className={styles.main}>
-      {list.data.map((item, index) => (
+      {data.map((item: Product, index: number) => (
         <Node key={item.id} {...item} last={index === list.data.length - 1} />
       ))}
     </div>

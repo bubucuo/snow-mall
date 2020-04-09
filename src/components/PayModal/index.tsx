@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { Drawer, Card, InputItem, Button, WhiteSpace } from 'antd-mobile';
+import { history } from 'umi';
+import {
+  Drawer,
+  Card,
+  InputItem,
+  Button,
+  WhiteSpace,
+  Toast,
+} from 'antd-mobile';
+
 import styles from './index.less';
 
 interface Props {
@@ -7,28 +16,36 @@ interface Props {
   onOpenChange: Function;
 }
 
-const payFor = () => {
-  console.log('payFor'); //sy-log
-};
-
-const sidebar = (
-  <Card>
-    <Card.Header title="付款详情" />
-    <Card.Body>
-      <InputItem type="phone" placeholder="请输入手机号" />
-      <div className="xyCenter">
-        <InputItem type="number" maxLength={6} placeholder="请输入6位验证码" />
-        <Button>发送验证码</Button>
-      </div>
-      <WhiteSpace size="lg" />
-      <Button type="primary" onClick={payFor}>
-        立即付款
-      </Button>
-    </Card.Body>
-  </Card>
-);
-
 const PayModal: React.FC<Props> = ({ showPay, onOpenChange }) => {
+  const payFor = () => {
+    Toast.success('支付成功！', 2);
+    onOpenChange();
+    setTimeout(() => {
+      history.push('/olist');
+    }, 2000);
+  };
+
+  const sidebar = (
+    <Card>
+      <Card.Header title="付款详情" />
+      <Card.Body>
+        <InputItem type="phone" placeholder="请输入手机号" />
+        <div className="xyCenter">
+          <InputItem
+            type="number"
+            maxLength={6}
+            placeholder="请输入6位验证码"
+          />
+          <Button>发送验证码</Button>
+        </div>
+        <WhiteSpace size="lg" />
+        <Button type="primary" onClick={payFor}>
+          立即付款
+        </Button>
+      </Card.Body>
+    </Card>
+  );
+
   return (
     <Drawer
       className="my-drawer"

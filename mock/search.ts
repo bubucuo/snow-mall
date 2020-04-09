@@ -1,43 +1,84 @@
 var Mock = require('mockjs');
 import { Request, Response } from 'express';
+import { getProduct } from './util';
+import { productList } from './const';
 
 interface getProductListProps {
   pageNo: number;
   pageSize: number;
-  searchKey: string;
+  searchKey?: string;
   totalPage: number;
 }
 
 function getProductList({
   pageNo = 0,
   pageSize = 10,
-  searchKey = '',
   totalPage,
 }: getProductListProps): {}[] {
   const getProductList = [];
-  const catgory = ['手机', '报纸'];
-  let productImg = [
-    '//img10.360buyimg.com/n2/s240x240_jfs/t1/50018/39/8127/229510/5d5b5043E66769ff0/8907776f7bd66d57.jpg!q70.jpg',
-    '//img11.360buyimg.com/n2/s370x370_jfs/t1/50238/3/3329/373862/5d118888Ebc20ea79/52977f9388dc1867.jpg!q70.jpg',
-  ];
   for (let i = 0; i < pageSize; i++) {
     let realIndex = pageNo * pageSize + i;
     if (realIndex > totalPage - 1) {
       break;
     }
+    let obj = getProduct(realIndex);
     getProductList.push({
       id: realIndex, //i,
-      img: productImg[i % 2],
-      // img: Mock.Random.image('120x120'),
-      title: searchKey + realIndex + catgory[i % 2] + Mock.Random.ctitle(5, 50),
+      title: obj.title,
+      img: obj.imgs[0],
+      tags: obj.tags,
       price: (Math.random() * 1000).toFixed(2),
       link: '',
-      tags: [
-        catgory[i % 2],
-        Mock.Random.ctitle(3, 6),
-        Mock.Random.ctitle(3, 6),
-      ],
     });
+  }
+  return getProductList;
+}
+
+function getProductListBySearch({
+  pageNo = 0,
+  pageSize = 10,
+  searchKey = '',
+  totalPage,
+}: getProductListProps): {}[] {
+  const getProductList = [];
+  let i = 0; //遍历所有的下标
+  let n = 0; //记录当前所有符合条件的数组的下标
+
+  while (i < productList.length) {
+    let obj = getProduct(i++);
+    if (!!searchKey) {
+      const refer = obj.catgory + obj.title + obj.tags.join('');
+      // 不符合查询条件
+      if (refer.indexOf(searchKey) === -1) {
+        continue;
+      }
+    }
+
+    // 如果符合 查看是否是当前页的元素
+
+    // 上一页
+    if (n < pageNo * pageSize) {
+      n++;
+      continue;
+    }
+
+    // 下一页了
+    if (n >= (pageNo + 1) * pageSize) {
+      break;
+    }
+
+    // 符合条件
+    // 是否是当前页码
+
+    getProductList.push({
+      id: n,
+      title: n + obj.title,
+      img: obj.imgs[0],
+      tags: obj.tags,
+      price: (Math.random() * 1000).toFixed(2),
+      link: '',
+    });
+    n++;
   }
   return getProductList;
 }
@@ -46,15 +87,31 @@ function getProductList({
 export default {
   'POST /api/search': (req: Request, res: Response) => {
     const { pageNo, pageSize, searchKey } = req.body;
-    const totalPage = 45;
+    const totalPage = productList.length;
 
-    const listData = getProductList({ pageNo, pageSize, searchKey, totalPage });
+    let listData;
+    if (!!searchKey) {
+      listData = getProductListBySearch({
+        pageNo,
+        pageSize,
+        searchKey,
+        totalPage,
+      });
+    } else {
+      listData = getProductList({
+        pageNo,
+        pageSize,
+        totalPage,
+      });
+    }
+
     res.send({
       status: 'ok',
       pageNo,
       pageSize,
+      searchKey,
       data: listData,
-      totalPage,
+      totalPage: !!searchKey ? null : totalPage,
     });
   },
 };

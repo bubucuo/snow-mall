@@ -62,9 +62,10 @@ export default class List extends React.Component<ListProps, ListState> {
 
   //下拉刷新
   onEndReached = () => {
-    const { pageNo, totalPage, data } = this.props.list;
+    const { pageNo, totalPage, searchKey, data } = this.props.list;
+
     if (data.length < totalPage) {
-      this.props.query({ pageNo: pageNo + 1 });
+      this.props.query({ pageNo: pageNo + 1, searchKey });
     }
   };
 

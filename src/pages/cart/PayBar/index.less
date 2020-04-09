@@ -4,6 +4,7 @@
   bottom: 0;
   left: 0;
   right: 0;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,15 +14,20 @@
 
   .btn {
     font-size: 14px;
-    width: 80px;
     line-height: 28px;
     height: 36px;
     margin-right: 14px;
     background: red;
     color: white;
     border: none;
-    padding: 4px;
+    padding: 4px 10px;
     text-align: center;
     border-radius: 16px;
+  }
+
+  :global {
+    .am-list-line::after {
+      display: none !important;
+    }
   }
 }

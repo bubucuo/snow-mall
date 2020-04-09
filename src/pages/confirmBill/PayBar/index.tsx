@@ -22,16 +22,15 @@ const PayBar: React.FC<IndexProps> = ({
   onChange,
 }) => {
   const [showPay, setShowPay] = useState(false);
-  const onOpenChange = () => {
+  const onOpenChange = (): void => {
     setShowPay(!showPay);
   };
   return (
     <div className={styles.main}>
       <Card full className={styles.payBar}>
-        {/* <WingBlank size="lg"> */}
         <span>共 {count} 件</span>
         <span>
-          合计: ￥ <span>{totalPrice.toFixed(2)}</span>
+          合计: ￥ <span>{totalPrice && totalPrice.toFixed(2)}</span>
         </span>
         <Button
           type="primary"
@@ -40,7 +39,6 @@ const PayBar: React.FC<IndexProps> = ({
         >
           去支付
         </Button>
-        {/* </WingBlank> */}
       </Card>
       <PayModal showPay={showPay} onOpenChange={onOpenChange} />
     </div>

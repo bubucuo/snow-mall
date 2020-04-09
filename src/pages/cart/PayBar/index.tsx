@@ -31,7 +31,7 @@ const PayBar: React.FC<IndexProps> = ({
   }, [list.data]);
 
   return (
-    <div className={styles.main}>
+    <Card full className={styles.main}>
       <CheckboxItem
         onChange={({ target }) => onChange({ ...target })}
         checked={checkedAll}
@@ -51,7 +51,7 @@ const PayBar: React.FC<IndexProps> = ({
       >
         去结算(<span>{count}</span>)
       </Link>
-    </div>
+    </Card>
   );
 };
 

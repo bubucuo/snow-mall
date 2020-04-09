@@ -42,7 +42,8 @@ const Model: SearchModelType = {
   reducers: {
     saveSearch(state, action) {
       // 合并
-      const { pageSize, pageNo, totalPage, data } = action.payload;
+      const { pageSize, totalPage, pageNo, data } = action.payload;
+
       let newData = [];
       if (pageNo === 0) {
         newData = data;
@@ -50,12 +51,23 @@ const Model: SearchModelType = {
         newData = [...state.list.data, ...data];
       }
 
+      let newTotalPage = 0;
+      if (!totalPage) {
+        // 查询
+        if (data.length < pageSize || data.length == 0) {
+          newTotalPage = newData.length;
+        } else {
+          newTotalPage = 999999;
+        }
+      } else {
+        newTotalPage = totalPage;
+      }
+
       return {
         ...state,
         list: {
-          pageSize,
-          pageNo,
-          totalPage,
+          ...action.payload,
+          totalPage: newTotalPage,
           data: newData,
         },
       };

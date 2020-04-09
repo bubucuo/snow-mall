@@ -1,14 +1,15 @@
 var Mock = require('mockjs');
 import { Request, Response } from 'express';
+import { getProduct } from './util';
 
 function getList() {
   let res = [];
   for (let i = 0; i < 2; i++) {
+    let obj = getProduct();
     res.push({
       id: i + '',
-      title: i % 2 ? '手机' : '报纸' + Mock.Random.ctitle(5, 50),
-      img:
-        '//img10.360buyimg.com/mobilecms/11833/105e2f6e-5b46-4c9d-8996-bf1542b77a95.jpg',
+      title: obj.title,
+      img: obj.imgs[0],
       price: 100,
       count: 2,
       checked: !!(i % 2),
