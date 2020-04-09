@@ -1,30 +1,33 @@
 import React, { useState } from 'react';
-import { Carousel } from 'antd-mobile';
+import { Card, Carousel } from 'antd-mobile';
+import classnames from 'classnames';
 import styles from './index.less';
 
 export default ({ data = [] }) => {
   const [imgHeight, setImgHeight] = useState(176);
   return (
-    <Carousel className={styles.main} autoplay={false} infinite>
-      {data.map(item => (
-        <a
-          className={styles.carouselItem}
-          key={item.src}
-          style={{
-            height: imgHeight,
-          }}
-        >
-          <img
-            src={item.src}
-            alt={item.alt}
-            onLoad={() => {
-              // fire window resize event to change height
-              window.dispatchEvent(new Event('resize'));
-              setImgHeight('auto');
+    <Card full>
+      <Carousel className={styles.main} autoplay={false} infinite>
+        {data.map((item, index) => (
+          <a
+            className={classnames(styles.carouselItem, 'xyCenter')}
+            key={index}
+            style={{
+              height: imgHeight,
             }}
-          />
-        </a>
-      ))}
-    </Carousel>
+          >
+            <img
+              src={item}
+              alt="图片"
+              onLoad={() => {
+                // fire window resize event to change height
+                window.dispatchEvent(new Event('resize'));
+                setImgHeight('auto');
+              }}
+            />
+          </a>
+        ))}
+      </Carousel>
+    </Card>
   );
 };

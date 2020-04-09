@@ -1,10 +1,10 @@
 import { query } from '@/services/olist';
 import { Effect, Reducer } from 'umi';
-import { ProductList } from './connect';
+import { ProductListType } from 'types/Product';
 
 export interface OListModelState {
   checkedIds: string[];
-  list: ProductList;
+  list: ProductListType;
 }
 
 export interface OListModelType {

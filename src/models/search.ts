@@ -1,9 +1,9 @@
-import { ProductList } from './connect.d';
 import { query } from '@/services/search';
 import { Effect, Reducer } from 'umi';
+import { ProductListType } from 'types/Product';
 
 export interface SearchModelState {
-  list: ProductList;
+  list: ProductListType;
 }
 
 export interface SearchModelType {

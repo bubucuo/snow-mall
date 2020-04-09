@@ -3,11 +3,11 @@ import { WingBlank, Card, Button } from 'antd-mobile';
 import classnames from 'classnames';
 import styles from './index.less';
 import { Link, useSelector } from 'umi';
-import { ProductList } from '@/models/connect';
 import PayModal from '@/components/PayModal';
+import { ProductListType } from 'types/Product';
 
 interface IndexProps {
-  list: ProductList;
+  list: ProductListType;
   totalPrice: number;
   count: number;
   checkedAll: boolean;

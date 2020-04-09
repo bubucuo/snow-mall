@@ -24,8 +24,8 @@ const Model: ProductModelType = {
   namespace: 'product',
   state: {},
   effects: {
-    *query(_, { call, put }) {
-      const response = yield call(query);
+    *query({ payload }, { call, put }) {
+      const response = yield call(query, payload);
       yield put({
         type: 'saveProduct',
         payload: response.data,

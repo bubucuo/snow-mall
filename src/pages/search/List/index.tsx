@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Link } from 'umi';
 import { Card, Icon, ListView, WingBlank } from 'antd-mobile';
 import styles from './index.less';
-import { ProductList, Product } from 'types/Product';
+import { ProductListType, ProductType } from 'types/Product';
 
 function Tags({ data = [] }) {
   return (
@@ -19,7 +19,7 @@ function Tags({ data = [] }) {
   );
 }
 
-function Node({ img, title, price, tags, id }: Product) {
+function Node({ img, title, price, tags, id }: ProductType) {
   return (
     <Link className={styles.node} to={'/product/' + id}>
       <div className={styles.imgBox}>
@@ -38,7 +38,7 @@ function Node({ img, title, price, tags, id }: Product) {
 }
 
 interface ListProps {
-  list: ProductList;
+  list: ProductListType;
   query: Function;
 }
 
@@ -70,7 +70,7 @@ export default class List extends React.Component<ListProps, ListState> {
   };
 
   //获取item进行展示
-  renderRow = (item: Product) => {
+  renderRow = (item: ProductType) => {
     return <Node {...item} />;
   };
   render() {

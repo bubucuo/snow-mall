@@ -10,8 +10,8 @@ function getList() {
       id: i + '',
       title: obj.title,
       img: obj.imgs[0],
-      price: 100,
-      count: 2,
+      price: (Math.random() * 1000).toFixed(2),
+      count: Mock.Random.integer(1, 10),
       checked: !!(i % 2),
     });
   }

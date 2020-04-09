@@ -2,9 +2,9 @@ import React from 'react';
 import { Card, WhiteSpace } from 'antd-mobile';
 import classnames from 'classnames';
 import styles from './index.less';
-import { ProductList, Product } from '@/models/connect';
+import { ProductListType, ProductType } from 'types/Product';
 
-interface NodeProps extends Product {
+interface NodeProps extends ProductType {
   key: string;
   last: boolean;
 }
@@ -30,14 +30,14 @@ const Node: React.FC<NodeProps> = ({ id, title, img, price, count, last }) => {
 };
 
 interface IndexProps {
-  list: ProductList;
+  list: ProductListType;
 }
 
 const List: React.FC<IndexProps> = ({ list = { data: [] } }) => {
   const { data } = list;
   return (
     <div className={styles.main}>
-      {data.map((item: Product, index: number) => (
+      {data.map((item: ProductType, index: number) => (
         <Node key={item.id} {...item} last={index === list.data.length - 1} />
       ))}
     </div>

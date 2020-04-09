@@ -36,7 +36,8 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     );
   }
 
-  const showBottomNav = pathname !== '/product' && pathname !== '/login';
+  const showBottomNav =
+    pathname !== '/login' && pathname.indexOf('/product/') === -1;
 
   return (
     <div className={styles.main}>

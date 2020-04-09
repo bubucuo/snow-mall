@@ -1,38 +1,42 @@
 import React, { useEffect } from 'react';
 import { connect, Dispatch } from 'umi';
 import classnames from 'classnames';
+import { Card, WhiteSpace, Tag } from 'antd-mobile';
 import Carousel from './Carousel';
-
 import styles from './[id].less';
 import CartAndBuy from './CartAndBuy';
+import { ProductType } from 'types/Product';
+import Tags from '@/components/Tags';
 
 interface ProductProps {
+  match: any;
   dispatch: Dispatch;
-  product: {
-    imgs: object[];
-    price: number;
-    title: string;
-  };
+  product: ProductType;
 }
 
-const Product: React.FC<ProductProps> = props => {
-  const { dispatch, children } = props;
-
+const Product: React.FC<ProductProps> = ({ match, dispatch, product }) => {
   useEffect(() => {
-    if (dispatch) {
-      dispatch({
-        type: 'product/query',
-      });
-    }
+    dispatch({
+      type: 'product/query',
+      payload: match.params,
+    });
   }, []);
 
-  const { imgs, price, title } = props.product;
+  const { imgs, price, title, tags } = product;
+  console.log('tags', tags); //sy-log
   return (
     <div className={styles.main}>
       <Carousel data={imgs} />
-      <p className={classnames('red', 'bold')}>￥{price}</p>
-      <p className={classnames('font14')}>{title}</p>
-      <CartAndBuy />
+      <WhiteSpace size="lg"></WhiteSpace>
+
+      <Card full>
+        <p className={classnames('red', 'bold')}>￥{price}</p>
+        <p className={classnames('font14')}>{title}</p>
+        <WhiteSpace size="lg"></WhiteSpace>
+        <Tags tags={tags} />
+      </Card>
+
+      <CartAndBuy {...product} />
     </div>
   );
 };

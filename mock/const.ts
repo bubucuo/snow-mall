@@ -233,6 +233,9 @@ export var productList = [
     title: '老报纸',
     imgs: [
       '//img11.360buyimg.com/n2/s370x370_jfs/t1/50238/3/3329/373862/5d118888Ebc20ea79/52977f9388dc1867.jpg!q70.jpg',
+      '//m.360buyimg.com/mobilecms/s843x843_jfs/t1/53673/26/3253/319180/5d118889E0aa18b33/e9e83b343c21b9f0.jpg!q70.dpg.webp',
+      '//m.360buyimg.com/mobilecms/s843x843_jfs/t1/55261/29/13423/274282/5da340c1E1f0ddfd4/36967f8d08908ce7.jpg!q70.dpg.webp',
+      '//m.360buyimg.com/mobilecms/s750x750_11833/105e2f6e-5b46-4c9d-8996-bf1542b77a95.jpg!q80.dpg.webp',
     ],
     tags: ['复古'],
   },
@@ -309,5 +312,16 @@ export var productList = [
       'https://tva1.sinaimg.cn/large/00831rSTly1gdnkzoz2rwj309a0fi44m.jpg',
     ],
     tags: ['报纸风'],
+  },
+
+  {
+    catgory: '女装',
+    title: '女装',
+    imgs: [
+      'https://tva1.sinaimg.cn/large/00831rSTly1gdegl69kmoj30gi0fqq9x.jpg',
+      '//img10.360buyimg.com/n2/s240x240_jfs/t1/50018/39/8127/229510/5d5b5043E66769ff0/8907776f7bd66d57.jpg!q70.jpg',
+      'https://tva1.sinaimg.cn/large/00831rSTly1gdegmiois8j30hm0eo79w.jpg',
+    ],
+    tags: ['风'],
   },
 ];

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { ConnectProps, connect, Dispatch } from 'umi';
-import { ConnectState, ProductList } from '@/models/connect';
+import { ConnectState } from '@/models/connect';
 import styles from './index.less';
 import List from './List';
 import PayBar from './PayBar';
+import { ProductListType } from 'types/Product';
 
 interface onChangeProps {
   id: string;
@@ -13,7 +14,7 @@ interface onChangeProps {
 export interface CartProps extends ConnectProps {
   dispatch: Dispatch;
   cart: {
-    list: ProductList;
+    list: ProductListType;
   };
 }
 
@@ -31,7 +32,7 @@ class Cart extends React.Component<CartProps> {
     });
   }
 
-  compute = (list: ProductList): CartPropsForChild => {
+  compute = (list: ProductListType): CartPropsForChild => {
     let checkedCount = 0;
     let totalPrice = 0;
     let count = 0;
@@ -51,8 +52,8 @@ class Cart extends React.Component<CartProps> {
     };
   };
 
-  getNewList = (tar: onChangeProps): ProductList => {
-    let newList: ProductList = { data: [] };
+  getNewList = (tar: onChangeProps): ProductListType => {
+    let newList: ProductListType = { data: [] };
     newList.data = this.props.cart.list.data.concat([]);
     for (let i = 0; i < newList.data.length; i++) {
       let item = newList.data[i];

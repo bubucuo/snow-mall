@@ -1,12 +1,7 @@
-import {
-  AlipayCircleOutlined,
-  TaobaoCircleOutlined,
-  WeiboCircleOutlined,
-} from '@ant-design/icons';
+x;
 import { Alert, Checkbox } from 'antd';
 import React, { useState } from 'react';
 import { Link, connect, Dispatch } from 'umi';
-import { StateType } from '@/models/login';
 import { LoginParamsType } from '@/services/login';
 import { ConnectState } from '@/models/connect';
 
@@ -14,7 +9,6 @@ import styles from './index.less';
 
 interface LoginProps {
   dispatch: Dispatch;
-  userLogin: StateType;
   submitting?: boolean;
 }
 
@@ -32,10 +26,6 @@ const LoginMessage: React.FC<{
 );
 
 const Login: React.FC<LoginProps> = props => {
-  const { userLogin = {}, submitting } = props;
-  const { status, type: loginType } = userLogin;
-  const [autoLogin, setAutoLogin] = useState(true);
-
   const handleSubmit = () => {
     let values = {};
     const { dispatch } = props;
@@ -51,7 +41,6 @@ const Login: React.FC<LoginProps> = props => {
   );
 };
 
-export default connect(({ user, loading }: ConnectState) => ({
+export default connect(({ user }: ConnectState) => ({
   userLogin: user,
-  // submitting: loading.effects['user/login'],
 }))(Login);

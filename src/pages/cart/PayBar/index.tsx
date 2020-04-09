@@ -3,12 +3,12 @@ import { Card, Checkbox } from 'antd-mobile';
 import classnames from 'classnames';
 import styles from './index.less';
 import { Link } from 'umi';
-import { ProductList } from '@/models/connect';
+import { ProductListType } from 'types/Product';
 
 const CheckboxItem = Checkbox.CheckboxItem;
 
 interface IndexProps {
-  list: ProductList;
+  list: ProductListType;
   totalPrice: number;
   count: number;
   checkedAll: boolean;
@@ -23,7 +23,7 @@ const PayBar: React.FC<IndexProps> = ({
   onChange,
 }) => {
   const getCheckedList = useMemo(() => {
-    let newList: ProductList = { data: [] };
+    let newList: ProductListType = { data: [] };
     for (let i = 0; i < list.data.length; i++) {
       list.data[i].checked && newList.data.push(list.data[i]);
     }

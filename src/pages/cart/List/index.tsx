@@ -3,11 +3,11 @@ import { Checkbox } from 'antd-mobile';
 import classnames from 'classnames';
 import styles from './index.less';
 import Counter from '@/components/Counter';
-import { ProductList, Product } from 'types/Product';
+import { ProductListType, ProductType } from 'types/ProductType';
 
 const CheckboxItem = Checkbox.CheckboxItem;
 
-interface NodeProps extends Product {
+interface NodeProps extends ProductType {
   key: string;
   onChange: Function;
 }
@@ -49,7 +49,7 @@ const Node: React.FC<NodeProps> = ({
 
 interface IndexProps {
   onChange: Function;
-  list: ProductList;
+  list: ProductListType;
 }
 
 const List: React.FC<IndexProps> = ({ onChange, list = { data: [] } }) => {
