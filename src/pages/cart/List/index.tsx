@@ -3,7 +3,7 @@ import { Checkbox } from 'antd-mobile';
 import classnames from 'classnames';
 import styles from './index.less';
 import Counter from '@/components/Counter';
-import { ProductList, Product } from '@/models/connect';
+import { ProductList, Product } from 'types/Product';
 
 const CheckboxItem = Checkbox.CheckboxItem;
 

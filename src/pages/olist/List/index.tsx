@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, WhiteSpace } from 'antd-mobile';
 import classnames from 'classnames';
 import styles from './index.less';
-import { ProductList, Product } from '@/models/connect';
+import { Product, ProductList } from '@/models/connect';
 
 interface NodeProps extends Product {
   key: string;

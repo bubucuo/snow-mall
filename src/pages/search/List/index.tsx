@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Link } from 'umi';
 import { Card, Icon, ListView, WingBlank } from 'antd-mobile';
 import styles from './index.less';
-import { Product, ProductList } from '@/models/connect';
+import { ProductList, Product } from 'types/Product';
 
 function Tags({ data = [] }) {
   return (
