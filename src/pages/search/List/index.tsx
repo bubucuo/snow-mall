@@ -4,34 +4,36 @@ import { Link } from 'umi';
 import { Card, Icon, ListView, WingBlank } from 'antd-mobile';
 import styles from './index.less';
 import { ProductListType, ProductType } from 'types/Product';
+import classnames from 'classnames';
+import Tags from '@/components/Tags';
 
-function Tags({ data = [] }) {
-  return (
-    <ul className={styles.tags}>
-      {data.map((item, index) => {
-        return (
-          <li className={styles.tag} key={'tag' + index}>
-            {item}
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
+// function Tags({ data = [] }) {
+//   return (
+//     <ul className={styles.tags}>
+//       {data.map((item, index) => {
+//         return (
+//           <li className={styles.tag} key={'tag' + index}>
+//             {item}
+//           </li>
+//         );
+//       })}
+//     </ul>
+//   );
+// }
 
 function Node({ img, title, price, tags, id }: ProductType) {
   return (
     <Link className={styles.node} to={'/product/' + id}>
-      <div className={styles.imgBox}>
+      <div className={classnames(styles.imgBox, 'xyCenter')}>
         <img src={img} />
       </div>
       <WingBlank size="lg" className={styles.ctn}>
         <div className={styles.title}>{title}</div>
-        <div className={styles.priceBox}>
+        <div className={classnames(styles.priceBox, 'font16')}>
           <span className={styles.yuan}>￥</span>
           <span className={styles.price}>{price}</span>
         </div>
-        <Tags data={tags} />
+        <Tags tags={tags} />
       </WingBlank>
     </Link>
   );

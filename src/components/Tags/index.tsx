@@ -11,7 +11,7 @@ const Tags: React.FC<Props> = ({ tags = [] }) => {
   return (
     <div className={classnames(styles.main)}>
       {tags.map((tag, index) => (
-        <Tag key={index} className={styles.tag}>
+        <Tag key={index} className={classnames(styles.tag, 'font12')}>
           {tag}
         </Tag>
       ))}
