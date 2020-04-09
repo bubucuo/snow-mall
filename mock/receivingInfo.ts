@@ -22,7 +22,7 @@ function getList() {
 export default {
   'GET /api/getDefaultReceivingInfo': {
     name: '高少云',
-    tel: '19910100120',
+    tel: '10909110012',
     address: '北京市海淀区开课吧',
   },
 };
