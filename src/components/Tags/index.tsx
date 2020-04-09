@@ -10,8 +10,10 @@ interface Props {
 const Tags: React.FC<Props> = ({ tags = [] }) => {
   return (
     <div className={classnames(styles.main)}>
-      {tags.map((tag, item) => (
-        <Tag className={styles.tag}>{tag}</Tag>
+      {tags.map((tag, index) => (
+        <Tag key={index} className={styles.tag}>
+          {tag}
+        </Tag>
       ))}
     </div>
   );
