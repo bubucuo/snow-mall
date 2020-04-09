@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, history } from 'umi';
+import { history } from 'umi';
 import { Card, Button, InputItem } from 'antd-mobile';
+import classnames from 'classnames';
 import styles from './index.less';
 
 export default function SearchInput({ query }: { query: Function }) {
@@ -29,8 +30,9 @@ export default function SearchInput({ query }: { query: Function }) {
       </Button>
       <InputItem
         ref={searchbar}
-        className={styles.searchBar}
+        className={classnames(styles.searchBar)}
         // placeholder="寻找宝贝"
+        clear
         maxLength={100}
         value={input}
         onChange={onChange}

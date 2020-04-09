@@ -2,17 +2,16 @@
   .node {
     display: flex;
     height: 136px;
-    padding: 10px;
+    padding: 10px 0;
   }
 
   .imgBox {
     width: 120px;
-    margin-right: 16px;
-  }
 
-  img {
-    display: block;
-    height: 100%;
+    img {
+      display: block;
+      height: 100%;
+    }
   }
 
   .ctn {
@@ -86,8 +85,8 @@
   @media only screen and (-webkit-min-device-pixel-ratio: 2) {
     .productNodes {
       .ctn:after {
-        -webkit-transform: scaleY(0.5);
-        -webkit-transform-origin: 50% 0;
+        transform: scaleY(0.5);
+        transform-origin: 50% 0;
       }
     }
   }

@@ -1,7 +1,19 @@
 var Mock = require('mockjs');
 import { Request, Response } from 'express';
 
-function getProductList({ pageNo = 0, pageSize = 10, searchKey = '' }) {
+interface getProductListProps {
+  pageNo: number;
+  pageSize: number;
+  searchKey: string;
+  totalPage: number;
+}
+
+function getProductList({
+  pageNo = 0,
+  pageSize = 10,
+  searchKey = '',
+  totalPage,
+}: getProductListProps): {}[] {
   const getProductList = [];
   const catgory = ['手机', '报纸'];
   let productImg = [
@@ -10,6 +22,9 @@ function getProductList({ pageNo = 0, pageSize = 10, searchKey = '' }) {
   ];
   for (let i = 0; i < pageSize; i++) {
     let realIndex = pageNo * pageSize + i;
+    if (realIndex > totalPage - 1) {
+      break;
+    }
     getProductList.push({
       id: realIndex, //i,
       img: productImg[i % 2],
@@ -31,13 +46,15 @@ function getProductList({ pageNo = 0, pageSize = 10, searchKey = '' }) {
 export default {
   'POST /api/search': (req: Request, res: Response) => {
     const { pageNo, pageSize, searchKey } = req.body;
-    const listData = getProductList({ pageNo, pageSize, searchKey });
+    const totalPage = 45;
+
+    const listData = getProductList({ pageNo, pageSize, searchKey, totalPage });
     res.send({
       status: 'ok',
       pageNo,
       pageSize,
       data: listData,
-      totalPage: 45,
+      totalPage,
     });
   },
 };

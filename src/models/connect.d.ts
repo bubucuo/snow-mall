@@ -17,6 +17,7 @@ export interface Product {
   price: number;
   count?: number;
   checked?: boolean;
+  tags: [];
 }
 
 export interface ProductList {
