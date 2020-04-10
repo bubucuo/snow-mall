@@ -4,14 +4,18 @@ export interface ProductType {
   img: string;
   imgs?: any;
   price: number;
-  count?: number;
+  count: number;
   checked?: boolean;
   tags: [];
 }
 
 export interface ProductListType {
+  data: ProductType[];
+}
+
+export interface ProductListWithNumType extends ProductListType {
   pageNo: number;
   pageSize: number;
   totalPage: number;
-  data: Product[];
+  searchKey: string;
 }

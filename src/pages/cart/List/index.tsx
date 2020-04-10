@@ -3,7 +3,7 @@ import { Checkbox } from 'antd-mobile';
 import classnames from 'classnames';
 import styles from './index.less';
 import Counter from '@/components/Counter';
-import { ProductListType, ProductType } from 'types/ProductType';
+import { ProductListType, ProductType } from 'types/Product';
 
 const CheckboxItem = Checkbox.CheckboxItem;
 
@@ -32,7 +32,7 @@ const Node: React.FC<NodeProps> = ({
             <img src={img} alt={title} />
           </div>
           <div className={styles.right}>
-            <div className={styles.title}>{title}</div>
+            <div className={'twoRows'}>{title}</div>
             <div className={styles.info}>
               <p className={classnames('red')}>￥{price}</p>
               <Counter
@@ -55,7 +55,7 @@ interface IndexProps {
 const List: React.FC<IndexProps> = ({ onChange, list = { data: [] } }) => {
   return (
     <div className={styles.main}>
-      {list.data.map(item => (
+      {list.data.map((item: ProductType) => (
         <Node key={item.id} {...item} onChange={onChange} />
       ))}
     </div>

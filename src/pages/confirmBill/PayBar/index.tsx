@@ -2,25 +2,14 @@ import React, { useMemo, useState } from 'react';
 import { WingBlank, Card, Button } from 'antd-mobile';
 import classnames from 'classnames';
 import styles from './index.less';
-import { Link, useSelector } from 'umi';
 import PayModal from '@/components/PayModal';
-import { ProductListType } from 'types/Product';
 
 interface IndexProps {
-  list: ProductListType;
-  totalPrice: number;
-  count: number;
-  checkedAll: boolean;
-  onChange: Function;
+  totalPrice?: number;
+  count?: number;
 }
 
-const PayBar: React.FC<IndexProps> = ({
-  list,
-  totalPrice,
-  count,
-  checkedAll,
-  onChange,
-}) => {
+const PayBar: React.FC<IndexProps> = ({ totalPrice, count }) => {
   const [showPay, setShowPay] = useState(false);
   const onOpenChange = (): void => {
     setShowPay(!showPay);

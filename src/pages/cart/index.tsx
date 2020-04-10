@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { ConnectProps, connect, Dispatch } from 'umi';
+import { connect, Dispatch, CartModelState } from 'umi';
 import { ConnectState } from '@/models/connect';
 import styles from './index.less';
 import List from './List';
 import PayBar from './PayBar';
-import { ProductListType } from 'types/Product';
+import { ProductListType, ProductType } from 'types/Product';
 
 interface onChangeProps {
   id: string;
   count?: number;
   checked?: boolean;
 }
-export interface CartProps extends ConnectProps {
+export interface CartProps {
   dispatch: Dispatch;
-  cart: {
-    list: ProductListType;
-  };
+  cart: CartModelState;
 }
 
 export interface CartPropsForChild {
-  list: object[];
+  list: ProductListType;
   checkedAll: boolean;
   totalPrice: number;
   count: number;
@@ -35,9 +33,9 @@ class Cart extends React.Component<CartProps> {
   compute = (list: ProductListType): CartPropsForChild => {
     let checkedCount = 0;
     let totalPrice = 0;
-    let count = 0;
+    let count: number = 0;
     for (let i = 0; i < list.data.length; i++) {
-      let item = list.data[i];
+      let item: ProductType = list.data[i];
       item.checked && checkedCount++;
       if (item.checked) {
         totalPrice += item.price * item.count;

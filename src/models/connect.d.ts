@@ -1,7 +1,6 @@
 import { ConfirmBillModelState } from './confirmBill';
 import { CartModelState } from './cart';
 import { SearchModelState } from './search';
-import { MenuDataItem } from '@ant-design/pro-layout';
 import { UserModelState } from './user';
 import { ProductModelState, OListModelState } from 'umi';
 
@@ -27,6 +26,6 @@ export interface ConnectState {
   olist: OListModelState;
 }
 
-export interface Route extends MenuDataItem {
+export interface Route {
   routes?: Route[];
 }

@@ -3,23 +3,9 @@ import ReactDOM from 'react-dom';
 import { Link } from 'umi';
 import { Card, Icon, ListView, WingBlank } from 'antd-mobile';
 import styles from './index.less';
-import { ProductListType, ProductType } from 'types/Product';
+import { ProductListWithNumType, ProductType } from 'types/Product';
 import classnames from 'classnames';
 import Tags from '@/components/Tags';
-
-// function Tags({ data = [] }) {
-//   return (
-//     <ul className={styles.tags}>
-//       {data.map((item, index) => {
-//         return (
-//           <li className={styles.tag} key={'tag' + index}>
-//             {item}
-//           </li>
-//         );
-//       })}
-//     </ul>
-//   );
-// }
 
 function Node({ img, title, price, tags, id }: ProductType) {
   return (
@@ -28,7 +14,7 @@ function Node({ img, title, price, tags, id }: ProductType) {
         <img src={img} />
       </div>
       <WingBlank size="lg" className={styles.ctn}>
-        <div className={styles.title}>{title}</div>
+        <div className="twoRows">{title}</div>
         <div className={classnames(styles.priceBox, 'font16')}>
           <span className={styles.yuan}>￥</span>
           <span className={styles.price}>{price}</span>
@@ -40,7 +26,7 @@ function Node({ img, title, price, tags, id }: ProductType) {
 }
 
 interface ListProps {
-  list: ProductListType;
+  list: ProductListWithNumType;
   query: Function;
 }
 
@@ -65,7 +51,6 @@ export default class List extends React.Component<ListProps, ListState> {
   //下拉刷新
   onEndReached = () => {
     const { pageNo, totalPage, searchKey, data } = this.props.list;
-
     if (data.length < totalPage) {
       this.props.query({ pageNo: pageNo + 1, searchKey });
     }

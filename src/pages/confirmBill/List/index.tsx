@@ -17,9 +17,9 @@ const Node: React.FC<NodeProps> = ({ id, title, img, price, count, last }) => {
           <img src={img} alt={title} />
         </div>
         <div className={styles.right}>
-          <div className={classnames('font14')}>{title}</div>
+          <div className={classnames('twoRows')}>{title}</div>
           <div className={styles.info}>
-            <p className={classnames('red')}>￥{price}</p>
+            <p className={classnames('red', 'font14')}>￥{price}</p>
             <span className="font12">x {count}</span>
           </div>
         </div>
@@ -30,7 +30,7 @@ const Node: React.FC<NodeProps> = ({ id, title, img, price, count, last }) => {
 };
 
 interface IndexProps {
-  list: ProductListType;
+  list?: ProductListType;
 }
 
 const List: React.FC<IndexProps> = ({ list = { data: [] } }) => {

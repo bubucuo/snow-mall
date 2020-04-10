@@ -15,6 +15,7 @@ a {
   #root {
     width: 100%;
     overflow-x: hidden;
+
     .red {
       color: red;
     }
@@ -55,6 +56,21 @@ a {
 
     .flexNone {
       flex: none;
+    }
+
+    .twoRows {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      height: 38px;
+      word-break: break-all;
+      margin: 8px 0;
+      line-height: 1.36;
+      font-weight: bold;
+      font-size: 14px;
+      color: #333333;
     }
 
     .am-card {

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect, Dispatch } from 'umi';
+import { ConnectState } from '@/models/connect';
 import classnames from 'classnames';
 import { Card, WhiteSpace, Tag } from 'antd-mobile';
 import Carousel from './Carousel';
@@ -23,7 +24,6 @@ const Product: React.FC<ProductProps> = ({ match, dispatch, product }) => {
   }, []);
 
   const { imgs, price, title, tags } = product;
-  console.log('tags', tags); //sy-log
   return (
     <div className={styles.main}>
       <Carousel data={imgs} />

@@ -1,22 +1,17 @@
 import React, { useEffect } from 'react';
-import { connect, Dispatch } from 'umi';
+import { connect, Dispatch, SearchModelState } from 'umi';
+import { ConnectState } from '@/models/connect';
 import SearchInput from './SearchInput';
 import List from './List';
+import { QueryListType } from 'types/Query';
 
-import styles from './index.less';
-
-interface SearchProps extends ConnectProps {
+interface SearchProps {
   dispatch: Dispatch;
-  search: object;
-}
-
-interface queryProps {
-  pageNo: number;
-  pageSize: number;
+  search: SearchModelState;
 }
 
 const Search: React.FC<SearchProps> = ({ dispatch, search }) => {
-  const query = ({ pageNo, searchKey = '' }: queryProps): void => {
+  const query = ({ pageNo, searchKey = '' }: QueryListType): void => {
     dispatch({
       type: 'search/query',
       payload: { pageNo, searchKey },

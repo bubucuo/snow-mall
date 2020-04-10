@@ -282,7 +282,8 @@ export var productList = [
   },
   {
     catgory: '书',
-    title: '三国演义',
+    title:
+      '三国演义 这是四大名著之一 打打杀杀的 还可以吧 有时间可以看看 虽然打架杀人挺不好看的 字数够了吧',
     imgs: [
       '//img10.360buyimg.com/n2/s240x240_jfs/t1/54594/9/2803/246916/5d0a1635E98b4dc52/095f4cc72141902f.jpg!q70.jpg',
     ],

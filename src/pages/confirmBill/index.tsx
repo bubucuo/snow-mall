@@ -29,13 +29,15 @@ const ConfirmBill: React.FC<ConfirmBillProps> = ({
     });
   }, []);
 
+  const newList = location.state || { list: { data: [] } };
+
   return (
     <WingBlank className={styles.main}>
       <WhiteSpace size="lg" />
       <ReceivingInfo {...receivingInfo} />
       <WhiteSpace size="lg" />
-      <List {...(location.state || {})} />
-      <PayBar {...(location.state || {})} />
+      <List {...newList} />
+      <PayBar {...newList} />
       <WhiteSpace size="lg" />
     </WingBlank>
   );
