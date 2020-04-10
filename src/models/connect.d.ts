@@ -1,3 +1,4 @@
+import { HomeModelState } from './home';
 import { ConfirmBillModelState } from './confirmBill';
 import { CartModelState } from './cart';
 import { SearchModelState } from './search';
@@ -18,6 +19,7 @@ export interface Loading {
 
 export interface ConnectState {
   loading: Loading;
+  home: HomeModelState;
   user: UserModelState;
   search: SearchModelState;
   cart: CartModelState;
