@@ -8,6 +8,7 @@ import {
   WhiteSpace,
   Toast,
 } from 'antd-mobile';
+import classnames from 'classnames';
 
 import styles from './index.less';
 
@@ -30,13 +31,13 @@ const PayModal: React.FC<Props> = ({ showPay, onOpenChange }) => {
       <Card.Header title="付款详情" />
       <Card.Body>
         <InputItem type="phone" placeholder="请输入手机号" />
-        <div className="xyCenter">
+        <div className={classnames(styles.auth, 'xyCenter')}>
           <InputItem
             type="number"
             maxLength={6}
             placeholder="请输入6位验证码"
           />
-          <Button>发送验证码</Button>
+          <Button className={styles.authBtn}>发送验证码</Button>
         </div>
         <WhiteSpace size="lg" />
         <Button type="primary" onClick={payFor}>
@@ -48,7 +49,7 @@ const PayModal: React.FC<Props> = ({ showPay, onOpenChange }) => {
 
   return (
     <Drawer
-      className="my-drawer"
+      className={styles.main}
       position="bottom"
       style={{ minHeight: document.documentElement.clientHeight }}
       enableDragHandle

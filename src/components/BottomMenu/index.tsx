@@ -23,7 +23,7 @@ const menu = [
   },
   {
     key: 'user',
-    title: '我的淘宝',
+    title: '我的',
     link: '/user',
     icon: 'wode',
   },

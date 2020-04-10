@@ -1,11 +1,6 @@
-import {
-  AlipayCircleOutlined,
-  TaobaoCircleOutlined,
-  WeiboCircleOutlined,
-} from '@ant-design/icons';
-import { Button, WingBlank, WhiteSpace, InputItem, Toast } from 'antd-mobile';
+import React from 'react';
+import { Button, WingBlank, WhiteSpace, InputItem } from 'antd-mobile';
 import { createForm } from 'rc-form';
-import React, { useState } from 'react';
 import { Redirect, connect, Dispatch, Location, UserModelState } from 'umi';
 import { ConnectState } from '@/models/connect';
 
@@ -44,7 +39,7 @@ const Login: React.FC<LoginProps> = ({ location, user, dispatch, form }) => {
     });
   };
 
-  const { status, userid } = user;
+  const { userid } = user;
   const isLogin = userid !== null && userid !== undefined && userid !== '';
 
   if (isLogin) {

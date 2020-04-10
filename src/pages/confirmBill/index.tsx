@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ConnectProps, connect, Dispatch, ConfirmBillModelState } from 'umi';
 import { ConnectState } from '@/models/connect';
-
-import styles from './index.less';
 import ReceivingInfo from './ReceivingInfo';
 import List from './List';
 import PayBar from './PayBar';
@@ -32,7 +30,7 @@ const ConfirmBill: React.FC<ConfirmBillProps> = ({
   const newList = location.state || { list: { data: [] } };
 
   return (
-    <WingBlank className={styles.main}>
+    <WingBlank size="lg">
       <WhiteSpace size="lg" />
       <ReceivingInfo {...receivingInfo} />
       <WhiteSpace size="lg" />

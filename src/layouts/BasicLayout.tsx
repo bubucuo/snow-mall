@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect } from 'react';
 import { connect, Dispatch, Location, UserModelState, Redirect } from 'umi';
 import styles from './BasicLayout.less';
 import BottomNav from '@/components/BottomMenu';
 import { ConnectState } from '@/models/connect';
 import '../static/iconfont/iconfont.css';
-
-// import 'lib-flexible';
 import '../static/flexible';
 
 interface BasicLayoutProps {
