@@ -3,7 +3,6 @@ import styles from './index.less';
 import SearchInput from './SearchInput';
 import Carousel from './Carousel';
 import NavTable from './NavTable';
-import homePage2 from '../../static/homePage2.png';
 import Arc from '@/components/Arc';
 import Recommend from './Recommend';
 import { Dispatch, HomeModelState, connect } from 'umi';
@@ -26,7 +25,6 @@ const Home: React.FC<HomeProps> = ({ dispatch, home }) => {
       <Arc />
       <NavTable />
       <Recommend list={home.recommend.data} />
-      {/* <img src={homePage2} /> */}
     </div>
   );
 };

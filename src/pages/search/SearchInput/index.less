@@ -1,18 +1,19 @@
 .main {
   position: relative;
-  padding: 6px 66px 6px 6px !important;
+  padding: 12px 132px 12px 12px !important;
   background-color: #e3e3e5;
 
   .searchBar {
-    @size: 28px;
+    @size: 56px;
 
     min-height: @size;
     height: @size;
     line-height: @size;
     background-color: white;
-    font-size: 13px;
-    border-radius: 4px;
+    font-size: 26px;
+    border-radius: 8px;
     text-align: left;
+    box-sizing: content-box;
 
     :global {
       .am-search-synthetic-ph-container {
@@ -21,12 +22,12 @@
         justify-content: center;
 
         .am-search-synthetic-ph-icon {
-          width: 13px;
-          background-size: 12px auto;
+          width: 26px;
+          background-size: 24px auto;
         }
 
         .am-search-synthetic-ph-placeholder {
-          font-size: 13px;
+          font-size: 26px;
         }
       }
     }
@@ -34,11 +35,11 @@
 
   .btn {
     position: absolute !important;
-    top: 6px;
-    right: 8px;
-    width: 50px;
-    height: 28px;
-    line-height: 28px;
-    font-size: 13px;
+    top: 12px;
+    right: 16px;
+    width: 100px;
+    height: 56px;
+    line-height: 56px;
+    font-size: 26px;
   }
 }

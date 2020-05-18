@@ -4,7 +4,6 @@ import styles from './BasicLayout.less';
 import BottomNav from '@/components/BottomMenu';
 import { ConnectState } from '@/models/connect';
 import '../static/iconfont/iconfont.css';
-import '../static/flexible';
 
 interface BasicLayoutProps {
   dispatch: Dispatch;
