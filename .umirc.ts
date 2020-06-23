@@ -12,12 +12,13 @@ export default defineConfig({
   },
   title: '这是个商城',
   theme: {
-    '@primary-color': 'red',
+    'primary-color': 'red',
     'brand-primary': 'red',
     'brand-primary-tap': 'red',
+    'border-color-base': '#ddd',
   },
 
-  styles: [`body { background-color: red; }`, `https://a.com/b.css`],
+  // styles: [`body { background-color: red; }`, `https://a.com/b.css`],
   // layout: {},
 
   extraBabelPlugins: [
