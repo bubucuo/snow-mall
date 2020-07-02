@@ -42,7 +42,9 @@ const MyList = () => {
           <div className={classnames(styles.grids, 'xyCenter ', 'font12')}>
             {grids.map((item, index) => (
               <Link key={'link' + index} to={item.to} className={styles.grid}>
-                <i className={classnames('iconfont', 'icon-' + item.icon)} />
+                <i
+                  className={classnames('font16 iconfont', 'icon-' + item.icon)}
+                />
                 <div>{item.text}</div>
               </Link>
             ))}
