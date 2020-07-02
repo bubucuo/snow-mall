@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import BottomNav from '@/components/BottomNav';
-import { connect, Location, Dispatch } from 'umi';
+import { connect } from 'umi';
 import '@/static/iconfont/iconfont.css';
 import styles from './BasicLayout.less';
+import { ConnectState, ConnectProps, UserModelState } from '@/models/connect';
 
-interface BasicLayoutProps {
-  location: Location;
-  dispatch: Dispatch;
-  user: any;
+interface BasicLayoutProps extends ConnectProps {
+  user: UserModelState;
 }
 
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
@@ -23,15 +22,13 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   }, []);
 
   const { pathname } = location;
-
+  const showBottomNav = pathname !== '/login';
   return (
     <div className={styles.main}>
       <article>{children}</article>
-      <footer>
-        <BottomNav pathname={pathname} />
-      </footer>
+      <footer>{showBottomNav && <BottomNav pathname={pathname} />}</footer>
     </div>
   );
 };
 
-export default connect(({ user }) => ({ user }))(BasicLayout);
+export default connect(({ user }: ConnectState) => ({ user }))(BasicLayout);

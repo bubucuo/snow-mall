@@ -21,3 +21,7 @@ React 阶段项目训练营
 打开目录：cd snow-mall
 安装依赖：yarn
 启动项目：yarn start
+
+
+安装classnames和types
+npm install --save classnames @types/classnames
