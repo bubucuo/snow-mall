@@ -34,7 +34,7 @@ export default defineConfig({
       path: '/',
       component: '@/layouts/BasicLayout',
       routes: [
-        { path: '/', component: '@/pages/index' },
+        { path: '/', component: '@/pages/home/index' },
         { path: '/login', component: '@/pages/login/index' },
         {
           path: '/',
