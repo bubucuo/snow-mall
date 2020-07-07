@@ -66,7 +66,7 @@ export var productList = [
     imgs: [
       '//img11.360buyimg.com/n2/s240x240_jfs/t21010/207/701929964/289291/bfd00b3b/5b15fe0eN0c18f4a3.jpg!q70.jpg',
     ],
-    tags: ['胡塞尼', '伊朗', '诺贝尔', '童年'],
+    tags: ['胡塞尼', '伊朗', '诺贝尔'],
   },
   {
     catgory: '书',
@@ -74,7 +74,7 @@ export var productList = [
     imgs: [
       '//img14.360buyimg.com/mobilecms/s316x316_jfs/t17245/75/557876508/270398/ac71e992/5a9668d7N5381995d.jpg!q70.dpg.webp',
     ],
-    tags: ['胡塞尼', '伊朗', '诺贝尔', '玛利亚姆'],
+    tags: ['胡塞尼', '伊朗', '诺贝尔'],
   },
   {
     catgory: '书',

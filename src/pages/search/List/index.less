@@ -1,0 +1,58 @@
+.main {
+  .node {
+    display: flex;
+    height: 272px;
+    padding: 20px 0;
+  }
+
+  .imgBox {
+    width: 240px;
+
+    img {
+      display: block;
+      height: 100%;
+    }
+  }
+
+  .ctn {
+    position: relative;
+    flex: 1;
+
+    &:after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 1px;
+      pointer-events: none;
+      background-color: #e5e5e5;
+    }
+  }
+
+  .node:last-child .ctn:after {
+    height: 0;
+  }
+
+  .yuan,
+  .price {
+    color: #e93b3d;
+  }
+
+  .price {
+    font-weight: bold;
+  }
+
+  .yuan {
+    font-size: 28px;
+  }
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+    .productNodes {
+      .ctn:after {
+        transform: scaleY(0.5);
+        transform-origin: 50% 0;
+      }
+    }
+  }
+}

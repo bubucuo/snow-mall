@@ -7,18 +7,18 @@ interface getProductListProps {
   pageNo: number;
   pageSize: number;
   searchKey?: string;
-  totalPage: number;
+  total: number;
 }
 
 function getProductList({
   pageNo = 0,
   pageSize = 10,
-  totalPage,
+  total,
 }: getProductListProps): {}[] {
   const getProductList = [];
   for (let i = 0; i < pageSize; i++) {
     let realIndex = pageNo * pageSize + i;
-    if (realIndex > totalPage - 1) {
+    if (realIndex > total - 1) {
       break;
     }
     let obj = getProduct(realIndex);
@@ -34,13 +34,15 @@ function getProductList({
   return getProductList;
 }
 
+// 找到所有符合条件的数据，然后取值前几项
 function getProductListBySearch({
   pageNo = 0,
   pageSize = 10,
   searchKey = '',
-  totalPage,
-}: getProductListProps): {}[] {
+  total,
+}: getProductListProps): { data: {}[]; total: number } {
   const getProductList = [];
+
   let i = 0; //遍历所有的下标
   let n = 0; //记录当前所有符合条件的数组的下标
 
@@ -54,22 +56,6 @@ function getProductListBySearch({
       }
     }
 
-    // 如果符合 查看是否是当前页的元素
-
-    // 上一页
-    if (n < pageNo * pageSize) {
-      n++;
-      continue;
-    }
-
-    // 下一页了
-    if (n >= (pageNo + 1) * pageSize) {
-      break;
-    }
-
-    // 符合条件
-    // 是否是当前页码
-
     getProductList.push({
       id: n,
       title: n + obj.title,
@@ -78,40 +64,49 @@ function getProductListBySearch({
       price: (Math.random() * 1000).toFixed(2),
       link: '',
     });
-    n++;
   }
-  return getProductList;
+
+  return {
+    total: getProductList.length,
+    data: getProductList.slice(pageNo * pageSize, pageSize),
+  };
 }
 
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 export default {
   'POST /api/search': (req: Request, res: Response) => {
     const { pageNo, pageSize, searchKey } = req.body;
-    const totalPage = productList.length;
+    let total = productList.length;
 
     let listData;
     if (!!searchKey) {
-      listData = getProductListBySearch({
+      let obj = getProductListBySearch({
         pageNo,
         pageSize,
         searchKey,
-        totalPage,
+        total,
       });
+      listData = obj.data;
+      total = obj.total;
     } else {
       listData = getProductList({
         pageNo,
         pageSize,
-        totalPage,
+        total,
       });
     }
 
     res.send({
       status: 'ok',
-      pageNo,
-      pageSize,
-      searchKey,
-      data: listData,
-      totalPage: !!searchKey ? null : totalPage,
+      list: {
+        pagination: {
+          totalPage: Math.ceil(total / pageSize),
+          pageNo,
+          pageSize,
+          searchKey,
+        },
+        data: listData,
+      },
     });
   },
 };
