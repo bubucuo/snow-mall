@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import { PaginationType } from '@/@types/list';
 import { ProductType } from '@/@types/product';
 import { Card, ListView, WingBlank, Icon } from 'antd-mobile';
 import styles from './index.less';
 import { Link } from 'umi';
 import classnames from 'classnames';
 import Tags from '@/components/Tags';
+import { PaginationType } from '@/@types/list';
 
 interface ListProps {
   data: ProductType[];
   pagination: PaginationType;
-  saveState: Function;
   queryList: Function;
 }
 interface ListState {
@@ -24,10 +23,6 @@ export default class List extends Component<ListProps, ListState> {
     }),
   };
 
-  componentDidMount() {
-    this.props.queryList();
-  }
-
   onEndReached = () => {
     const { pagination } = this.props;
     if (pagination.pageNo < pagination.totalPage - 1) {
@@ -36,30 +31,39 @@ export default class List extends Component<ListProps, ListState> {
       });
     }
   };
+
+  componentDidMount() {
+    console.log('queryList', this.props); //sy-log
+    this.props.queryList();
+  }
+
   render() {
-    const { data, pagination } = this.props;
     const { dataSource } = this.state;
+    const { data, pagination } = this.props;
     return (
-      <Card className={styles.main}>
-        <ListView
-          dataSource={dataSource.cloneWithRows(data)}
-          renderRow={item => Node(item)}
-          initialListSize={10}
-          pageSize={pagination.pageSize}
-          onEndReached={this.onEndReached}
-          useBodyScroll={true}
-          renderFooter={() => (
-            <div className="txtCenter">
-              {pagination.pageNo < pagination.totalPage - 1 ? (
-                <Icon type="loading" />
-              ) : (
-                <div>加载完毕</div>
-              )}
-            </div>
-          )}
-          // 调用onEndReached之前的临界值，单位是像素
-          onEndReachedThreshold={10}
-        />
+      <Card full className={styles.main}>
+        {data.length > 0 ? (
+          <ListView
+            dataSource={dataSource.cloneWithRows(data)}
+            renderRow={item => Node(item)}
+            pageSize={pagination.pageSize}
+            initialListSize={pagination.pageSize}
+            onEndReached={this.onEndReached}
+            useBodyScroll={true}
+            renderFooter={() => (
+              <div className="txtCenter">
+                {pagination.pageNo < pagination.totalPage - 1 ? (
+                  <Icon type="loading" />
+                ) : (
+                  <div>加载完毕</div>
+                )}
+              </div>
+            )}
+            onEndReachedThreshold={10}
+          />
+        ) : (
+          <div className="txtCenter font14">暂无数据</div>
+        )}
       </Card>
     );
   }

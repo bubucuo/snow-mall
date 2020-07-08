@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import SearchInput from './SearchInput';
-import List from './List';
+import SeachInput from './SearchInput/';
+import List from './List/';
 import { ProductType } from '@/@types/product';
-import { PaginationType } from '../../@types/list';
+import { PaginationType } from '@/@types/list';
 import { query } from '@/services/search';
 
 interface ListState {
@@ -22,12 +22,16 @@ export default class Search extends Component<{}, ListState> {
   };
 
   queryList = (pagination?: PaginationType) => {
+    // 查询列表
     let pageNo = this.state.pagination.pageNo;
     let pageSize = this.state.pagination.pageSize;
     let searchKey = this.state.pagination.searchKey;
 
     if (pagination) {
-      pageNo = pagination.pageNo || pageNo;
+      // pageNo = pagination.pageNo || pageNo;
+      if (pagination.pageNo !== undefined) {
+        pageNo = pagination.pageNo;
+      }
       pageSize = pagination.pageSize || pageSize;
       searchKey = pagination.searchKey || searchKey;
     }
@@ -37,40 +41,33 @@ export default class Search extends Component<{}, ListState> {
       searchKey,
     }).then(res => {
       const { list } = res;
-      this.saveState(list, false);
+      this.saveState(list);
     });
   };
 
-  saveState = (
-    partialState: {
-      data?: ProductType[];
-      pagination: PaginationType;
-    },
-    queryNow: boolean,
-  ) => {
+  saveState = (partialState: {
+    data?: ProductType[];
+    pagination: PaginationType;
+  }) => {
     let data = [...this.state.data, ...(partialState.data || [])];
-    let pagination = { ...this.state.pagination, ...partialState.pagination };
+    let pagination = {
+      ...this.state.pagination,
+      ...partialState.pagination,
+    };
+
     if (pagination.pageNo === 0) {
       data = partialState.data || [];
     }
-    this.setState({ data, pagination }, () => {
-      if (queryNow) {
-        this.queryList();
-      }
-    });
+
+    this.setState({ data, pagination });
   };
 
   render() {
     const { data, pagination } = this.state;
     return (
       <div>
-        <SearchInput saveState={this.saveState} />
-        <List
-          data={data}
-          pagination={pagination}
-          saveState={this.saveState}
-          queryList={this.queryList}
-        />
+        <SeachInput queryList={this.queryList} />
+        <List data={data} pagination={pagination} queryList={this.queryList} />
       </div>
     );
   }
