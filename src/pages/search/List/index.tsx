@@ -57,6 +57,8 @@ export default class List extends Component<ListProps, ListState> {
               )}
             </div>
           )}
+          // 调用onEndReached之前的临界值，单位是像素
+          onEndReachedThreshold={10}
         />
       </Card>
     );
