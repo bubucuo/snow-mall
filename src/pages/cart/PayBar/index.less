@@ -1,0 +1,33 @@
+.main {
+  z-index: 3;
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  font-size: 24px;
+  flex-direction: row;
+
+  .btn {
+    font-size: 28px;
+    line-height: 56px;
+    height: 72px;
+    // margin-right: 14px;
+    background: red;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    text-align: center;
+    border-radius: 32px;
+  }
+
+  :global {
+    .am-list-line::after {
+      display: none !important;
+    }
+  }
+}

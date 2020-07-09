@@ -9,7 +9,7 @@ import { Card, WhiteSpace } from 'antd-mobile';
 import classnames from 'classnames';
 import CartAndBuy from './CartAndBuy';
 
-class Product extends Component<IRoute, {}> {
+class Product extends Component<IRoute, ProductType> {
   state: ProductType = {
     imgs: [],
     price: 0,
