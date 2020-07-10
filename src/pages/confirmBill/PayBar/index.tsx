@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Button } from 'antd-mobile';
 import classnames from 'classnames';
 import styles from './index.less';
+import PayModal from '@/components/PayModal';
 
 interface PayBarProps {
   totalPrice?: number;
@@ -9,8 +10,9 @@ interface PayBarProps {
 }
 
 const PayBar: React.FC<PayBarProps> = ({ totalPrice, count }) => {
+  const [showPay, setShowPay] = useState<boolean>(false);
   const onOpenChange = () => {
-    console.log('支付'); //sy-log
+    setShowPay(!showPay);
   };
   return (
     <div className={styles.main}>
@@ -27,6 +29,7 @@ const PayBar: React.FC<PayBarProps> = ({ totalPrice, count }) => {
           去支付
         </Button>
       </Card>
+      <PayModal showPay={showPay} onOpenChange={onOpenChange} />
     </div>
   );
 };
