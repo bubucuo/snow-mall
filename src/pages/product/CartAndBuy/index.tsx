@@ -4,10 +4,30 @@ import classnames from 'classnames';
 import styles from './index.less';
 import { ProductType } from '@/@types/product';
 import { Toast } from 'antd-mobile';
+import { connect, history } from 'umi';
+import { ConnectState, ConnectProps, CartModelState } from '@/models/connect';
+import { editCart } from '@/services/editCart';
 
-const CartAndBuy: React.FC<ProductType> = product => {
+interface CartAndBuyProps extends ConnectProps {
+  product: ProductType;
+  cart: CartModelState;
+}
+
+const CartAndBuy: React.FC<CartAndBuyProps> = ({ product, dispatch }) => {
   const addToCart = useCallback(() => {
-    Toast.success(product.title + '已加入购物车！');
+    editCart({ id: product.id, increment: 1 }).then(res => {
+      Toast.success(product.title + '已加入购物车！');
+    });
+  }, [product]);
+
+  const goPay = useCallback(() => {
+    dispatch({
+      type: 'cart/saveCart',
+      payload: {
+        data: [{ ...product, count: 1, checked: true, img: product.imgs[0] }],
+      },
+    });
+    history.push('/confirmBill');
   }, [product]);
   return (
     <div className={styles.main}>
@@ -21,11 +41,11 @@ const CartAndBuy: React.FC<ProductType> = product => {
       >
         加入购物车
       </div>
-      <Link to="/confirmBill" className={classnames(styles.buyNow, styles.btn)}>
+      <div className={classnames(styles.buyNow, styles.btn)} onClick={goPay}>
         立即购买
-      </Link>
+      </div>
     </div>
   );
 };
 
-export default CartAndBuy;
+export default connect(({ cart }: ConnectState) => ({ cart }))(CartAndBuy);

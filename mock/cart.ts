@@ -4,7 +4,7 @@ import { getProduct } from './util';
 
 function getList() {
   let res = [];
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < Mock.Random.integer(1, 10); i++) {
     let obj = getProduct();
     res.push({
       id: i + '',

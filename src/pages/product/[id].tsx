@@ -11,6 +11,7 @@ import CartAndBuy from './CartAndBuy';
 
 class Product extends Component<IRoute, ProductType> {
   state: ProductType = {
+    id: '',
     imgs: [],
     price: 0,
     title: '',
@@ -18,7 +19,6 @@ class Product extends Component<IRoute, ProductType> {
   };
 
   componentDidMount() {
-    console.log(this.props);
     const { id } = this.props.match.params;
     // 获取商品详情
     query({ id }).then(res => {
@@ -39,7 +39,7 @@ class Product extends Component<IRoute, ProductType> {
           <Tags tags={tags} />
         </Card>
 
-        <CartAndBuy {...this.state} />
+        <CartAndBuy product={this.state} />
       </div>
     );
   }

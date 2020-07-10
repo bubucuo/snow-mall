@@ -6,6 +6,7 @@ import List, { UpdateProductType } from './List';
 import PayBar from './PayBar';
 import { connect, history } from 'umi';
 import { ConnectProps, ConnectState } from '@/models/connect';
+import { editCart } from '@/services/editCart';
 
 interface CartState {
   data: CartProductType[];
@@ -29,7 +30,9 @@ class Cart extends Component<ConnectProps, CartState> {
       Object.assign(data[index], newState);
     }
 
-    this.setState({ data });
+    editCart({ id, count }).then(res => {
+      this.setState({ data });
+    });
   };
 
   checkedAllChange = (allChecked: boolean) => {
@@ -46,7 +49,6 @@ class Cart extends Component<ConnectProps, CartState> {
       payload: { data: checkedData },
     });
     history.push('/confirmBill');
-    console.log('checkedData', checkedData); //sy-log
   };
 
   render() {
