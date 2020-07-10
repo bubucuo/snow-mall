@@ -1,0 +1,30 @@
+.main {
+  .node {
+    @w: 140px;
+    display: flex;
+    flex-direction: row;
+
+    .imgBox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: @w;
+      margin: 0 20px 0 0;
+
+      img {
+        width: 140px;
+        height: auto;
+      }
+    }
+
+    .right {
+      flex-grow: 1;
+    }
+
+    .info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}
