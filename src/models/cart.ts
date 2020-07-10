@@ -1,7 +1,8 @@
 import { Reducer } from 'umi';
+import { CartProductType } from '@/@types/product';
 
 export interface CartModelState {
-  data: CartModelState[];
+  data: CartProductType[];
 }
 
 export interface CartModelType {
