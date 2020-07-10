@@ -12,13 +12,13 @@ const SearchInput: React.FC<SearchInputProps> = props => {
     inputRef.current.focus();
   }, []);
 
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState<string>('');
 
   const inputChange = useCallback((val: string) => {
     setInput(val);
   }, []);
 
-  const [searchMode, setSearchMode] = useState(false);
+  const [searchMode, setSearchMode] = useState<boolean>(false);
   const handle = useCallback(() => {
     if (searchMode) {
       // 搜索
