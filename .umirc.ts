@@ -45,6 +45,7 @@ export default defineConfig({
             { path: '/cart', component: '@/pages/cart/index' },
             { path: '/olist', component: '@/pages/olist/index' },
             { path: '/user', component: '@/pages/user/index' },
+            { path: '/confirmBill', component: '@/pages/confirmBill' },
           ],
         },
       ],
