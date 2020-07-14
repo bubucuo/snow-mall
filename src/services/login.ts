@@ -1,6 +1,6 @@
 import request from '@/utils/request';
 
-interface LoginParams {
+export interface LoginParams {
   name: string;
   password: string;
 }

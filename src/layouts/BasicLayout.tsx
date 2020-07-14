@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import BottomNav from '@/components/BottomNav';
 import { connect } from 'umi';
+import { ConnectState, ConnectProps, UserModelState } from '@/models/connect';
+import BottomNav from '@/components/BottomNav';
 import '@/static/iconfont/iconfont.css';
 import styles from './BasicLayout.less';
-import { ConnectState, ConnectProps, UserModelState } from '@/models/connect';
 
 interface BasicLayoutProps extends ConnectProps {
   user: UserModelState;

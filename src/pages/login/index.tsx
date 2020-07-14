@@ -7,7 +7,7 @@ import {
   UserModelState,
 } from '@/models/connect.d.ts';
 import LoginForm from './LoginForm';
-import { LoginParamsType } from '@/services/login';
+import { LoginParams } from '@/services/login';
 
 interface LoginProps extends ConnectProps {
   user: UserModelState;
@@ -20,7 +20,7 @@ const Login: React.FC<LoginProps> = ({ user, location, dispatch }) => {
     const { from = '/' } = location.state || {};
     return <Redirect to={from} />;
   }
-  const handleSubmit = (value: LoginParamsType) => {
+  const handleSubmit = (value: LoginParams) => {
     //  dispatch login
     dispatch({ type: 'user/login', payload: value });
   };
