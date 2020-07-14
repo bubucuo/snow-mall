@@ -1,55 +1,17 @@
 import { defineConfig } from 'umi';
-const theme = {
-  'brand-primary': 'red',
-  'color-text-base': 'green',
-  'ghost-button-color': 'yellow',
-};
+
 export default defineConfig({
-  antd: {
-    dark: true,
-    compact: true,
-    // '@primary-color': 'red',
-  },
   title: '这是个商城',
+  nodeModulesTransform: {
+    type: 'none',
+  },
   theme: {
     'primary-color': 'red',
     'brand-primary': 'red',
     'brand-primary-tap': 'red',
     'border-color-base': '#ddd',
   },
-
-  // styles: [`body { background-color: red; }`, `https://a.com/b.css`],
-  // layout: {},
-
-  extraBabelPlugins: [
-    [
-      'import',
-      {
-        libraryName: 'antd-mobile',
-        style: true,
-      },
-    ],
-  ],
-  // theme: {
-  //   'brand-primary': 'red',
-  //   'color-text-base': '#333',
-  // },
-  // cssLoaderOptions: ,
-  lessLoader: {
-    test: /\.less$/,
-    use: [
-      'style-loader',
-      'css-loader',
-      { loader: 'less-loader', options: { modifyVars: theme } },
-    ],
-    include: /node_modules/,
-  },
-
   extraPostCSSPlugins: [
-    require('postcss-flexbugs-fixes'),
-    require('postcss-write-svg')({
-      utf8: false,
-    }),
     require('postcss-px-to-viewport')({
       unitToConvert: 'px', //需要转换的单位，默认为"px"
       viewportWidth: 750, // 视窗的宽度，对应的是我们设计稿的宽度
@@ -68,27 +30,22 @@ export default defineConfig({
       landscapeWidth: 1134, //横屏时使用的视口宽度
     }),
   ],
-
   routes: [
     {
       path: '/',
       component: '@/layouts/BasicLayout',
       routes: [
-        { path: '/', exact: true, component: '@/pages/home' },
-        { path: '/home', component: '@/pages/home' },
-        { path: '/login', component: '@/pages/login' },
-        { path: '/search', component: '@/pages/search' },
+        { path: '/', component: '@/pages/home/index' },
+        { path: '/login', component: '@/pages/login/index' },
+        { path: '/search', component: '@/pages/search/index' },
         { path: '/product/:id', component: '@/pages/product/[id]' },
-
         {
           path: '/',
           component: '@/layouts/SecurityLayout',
           routes: [
-            // { path: '/login', component: '@/pages/login' },
-
-            { path: '/user', component: '@/pages/user' },
-            { path: '/olist', component: '@/pages/olist' },
-            { path: '/cart', component: '@/pages/cart' },
+            { path: '/cart', component: '@/pages/cart/index' },
+            { path: '/olist', component: '@/pages/olist/index' },
+            { path: '/user', component: '@/pages/user/index' },
             { path: '/confirmBill', component: '@/pages/confirmBill' },
           ],
         },
