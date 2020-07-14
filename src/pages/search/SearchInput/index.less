@@ -1,0 +1,51 @@
+.main {
+  position: relative;
+  padding: 12px 132px 12px 12px !important;
+  background-color: #e3e3e5;
+
+  .searchBar {
+    @size: 56px;
+
+    min-height: @size;
+    height: @size;
+    line-height: @size;
+    background-color: white;
+    font-size: 26px;
+    border-radius: 8px;
+    text-align: left;
+    box-sizing: content-box;
+
+    :global {
+      .am-search-synthetic-ph-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .am-search-synthetic-ph-icon {
+          width: 26px;
+          background-size: 24px auto;
+        }
+
+        .am-search-synthetic-ph-placeholder {
+          font-size: 26px;
+        }
+      }
+    }
+  }
+
+  .btn {
+    position: absolute !important;
+    top: 12px;
+    right: 16px;
+    width: 100px;
+    height: 56px;
+    line-height: 56px;
+    font-size: 26px;
+  }
+
+  :global {
+    a:hover {
+      color: white;
+    }
+  }
+}

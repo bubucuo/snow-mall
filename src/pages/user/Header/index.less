@@ -1,0 +1,29 @@
+.main {
+  margin-bottom: 20px;
+  .header {
+    background: linear-gradient(90deg, #dd9b4c, #ffd787);
+    box-shadow: 0 4px 10px #f8e3c6;
+  }
+
+  .userIcon {
+    @size: 100px;
+    width: @size;
+    height: @size;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  .name {
+    margin-left: 20px;
+  }
+
+  .arc {
+    margin-top: -4px;
+    transform: rotate(180deg);
+  }
+}
