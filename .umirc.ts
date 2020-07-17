@@ -5,6 +5,8 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
+  history: { type: 'hash' },
+  base: '/kkb',
   theme: {
     'primary-color': 'red',
     'brand-primary': 'red',
